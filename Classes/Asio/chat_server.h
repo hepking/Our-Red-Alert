@@ -1,6 +1,6 @@
 // chat_server.cpp
 // ~~~~~~~~~~~~~~~
-//½è¼øÁËasio¿âµÄ¹ÙÍødemo
+//å€Ÿé‰´äº†asioåº“çš„å®˜ç½‘demo
 // Copyright (c) 2003-2018 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
@@ -30,8 +30,8 @@ typedef std::deque<chat_message> chat_message_queue;
 class chat_server;
 
 /*
-*   @brief  tcp¶Ë¿Ú¹ÜÀíÀà
-*           ¸ºÔð´¢´æ¿Í»§¶Ë¶Ë¿ÚºÅ, Í¬²½Ð´ÏûÏ¢¶ÁÏûÏ¢
+*   @brief  tcpï¿½Ë¿Ú¹ï¿½ï¿½ï¿½ï¿½ï¿½
+*           ï¿½ï¿½ï¿½ð´¢´ï¿½Í»ï¿½ï¿½Ë¶Ë¿Úºï¿½, Í¬ï¿½ï¿½Ð´ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½Ï¢
 */
 class TcpConnection
 	: public std::enable_shared_from_this<TcpConnection>
@@ -40,105 +40,105 @@ public:
 	typedef std::shared_ptr<TcpConnection> pointer;
 	
 	/**
-	* @brief                        ´Ó·þÎñ¶Ë·µ»ØÒ»¸ö¿Í»§¶ËÖ¸Õë
+	* @brief                        ï¿½Ó·ï¿½ï¿½ï¿½Ë·ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Í»ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½
 	*
-	* @param io_service             ¸ø¿Í»§¶Ë·ÖÅäÒ»¸öÈÎÎñ¶ÓÁÐ
-	* @param parent                 ·µ»ØµÄ¿Í»§¶ËÀ´×Ô·þÎñ¶Ë¶ÔÏó
+	* @param io_service             ï¿½ï¿½ï¿½Í»ï¿½ï¿½Ë·ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	* @param parent                 ï¿½ï¿½ï¿½ØµÄ¿Í»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô·ï¿½ï¿½ï¿½Ë¶ï¿½ï¿½ï¿½
 	*/
 	static pointer create(asio::io_service& io_service, chat_server* parent);
 	
 	/**
-	* @brief                        ¸ø³ö¶Ë¿ÚÊ¹ÓÃÈ¨
+	* @brief                        ï¿½ï¿½ï¿½ï¿½ï¿½Ë¿ï¿½Ê¹ï¿½ï¿½È¨
 	*/
 	tcp::socket& socket();
 
 	/**
-	* @brief                        ´Ó·þÎñ¶ËµÃµ½µÄÌ×½Ó×Ö
+	* @brief                        ï¿½Ó·ï¿½ï¿½ï¿½ËµÃµï¿½ï¿½ï¿½ï¿½×½ï¿½ï¿½ï¿½
 	*
-	* @param socket                 °Ñ¶Ë¿ÚºÅ´Óserver×ª¸øtcpconnection
+	* @param socket                 ï¿½Ñ¶Ë¿ÚºÅ´ï¿½server×ªï¿½ï¿½tcpconnection
 	*/
 	void get_socket(tcp::socket);
 
 	/**
-	* @brief                        ¿ªÊ¼¶ÁÈ¡ÄÚÈÝ
+	* @brief                        ï¿½ï¿½Ê¼ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
 	*/
 	void start();
 	
 	/**
-	* @brief                        Ð´ÄÚÈÝ¸ø·þÎñ¶Ë
+	* @brief                        Ð´ï¿½ï¿½ï¿½Ý¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	*/
 	void write_data(std::string s);
 
 	/**
-	* @brief                        ¶ÁÈ¡ÄÚÈÝµÄ¾ßÌå²Ù×÷
+	* @brief                        ï¿½ï¿½È¡ï¿½ï¿½ï¿½ÝµÄ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	*
 	*/
 	std::string read_data();
 
 	/**
-	* @brief                        È·¶¨ÓÐÃ»ÓÐ³ö´í
+	* @brief                        È·ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ð³ï¿½ï¿½ï¿½
 	*
 	*/
 	bool error()const { return error_flag_; }
 
 	/**
-	* @brief                        ¹Ø±Õ½ø³ÌºÍ¶Ë¿ÚºÅ
+	* @brief                        ï¿½Ø±Õ½ï¿½ï¿½ÌºÍ¶Ë¿Úºï¿½
 	*
 	*/
 	void do_close();
 private:
 	
 	/**
-	* @brief                        ´¦ÀíÏûÏ¢ÕýÎÄÄÚÈÝ
+	* @brief                        ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	*
 	*/
 	void handle_read_header(const asio::error_code& error);
 	
 	/**
-	* @brief                        ´¦ÀíÏûÏ¢ÕýÎÄÄÚÈÝ
+	* @brief                        ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	*
 	*/
 	void handle_read_body(const asio::error_code& error);
 
 	/**
-	* @brief                        ´´½¨Ò»¸ötcpÁ¬½Ó
+	* @brief                        ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½tcpï¿½ï¿½ï¿½ï¿½
 	*
-	* @param io_service             ¸ø¿Í»§¶Ë·ÖÅäÒ»¸öÈÎÎñ¶ÓÁÐ
-	* @param parent                 ·µ»ØµÄ¿Í»§¶ËÀ´×Ô·þÎñ¶Ë¶ÔÏó
+	* @param io_service             ï¿½ï¿½ï¿½Í»ï¿½ï¿½Ë·ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	* @param parent                 ï¿½ï¿½ï¿½ØµÄ¿Í»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô·ï¿½ï¿½ï¿½Ë¶ï¿½ï¿½ï¿½
 	*/
 	TcpConnection(asio::io_service& io_service, chat_server * parent);;
 
-	tcp::socket socket_;             //°Ñ½¨Á¢Á¬½ÓµÄÌ×½Ó×Ö¼ÇÂ¼ÏÂÀ´
+	tcp::socket socket_;             //ï¿½Ñ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½×½ï¿½ï¿½Ö¼ï¿½Â¼ï¿½ï¿½ï¿½ï¿½
 
-	chat_server* parent;             //·þÎñ¶ËÖ¸Õë
+	chat_server* parent;             //ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½
 
-	bool error_flag_{ false };       //´íÎó±êÖ¾
+	bool error_flag_{ false };       //ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾
 
-	chat_message read_msg_;          //µ±Ç°¶ÁÈ¡ÏûÏ¢
-	std::deque<chat_message> read_msg_deque_; //¶ÁÈ¡ÏûÏ¢Òª´æÈë´ý½âÎö¶ÓÁÐ
-	std::condition_variable data_cond_;  //Ìõ¼þ±äÁ¿
-	std::mutex mut_;                 //½ø³ÌËø
+	chat_message read_msg_;          //ï¿½ï¿½Ç°ï¿½ï¿½È¡ï¿½ï¿½Ï¢
+	std::deque<chat_message> read_msg_deque_; //ï¿½ï¿½È¡ï¿½ï¿½Ï¢Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	std::condition_variable data_cond_;  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	std::mutex mut_;                 //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	//	asio::steady_timer steady_timer_;
 
 };
 /**
-* @brief                        ·þÎñ¶Ë
+* @brief                        ï¿½ï¿½ï¿½ï¿½ï¿½
 *
 */
 class chat_server
 {
 public:
 	/**
-	* @brief                    µØÍ¼ºÅ
+	* @brief                    ï¿½ï¿½Í¼ï¿½ï¿½
 	*
 	*/
 	int map = 2;
 	
 	/**
-	* @brief                        ¸ø½ÓÊÕÆ÷Ò»¸öÈÎÎñ¶ÓÁÐ
+	* @brief                        ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	*
-	* @param io_service             ¸ø·þÎñ¶Ë·ÖÅäÒ»¸öÈÎÎñ¶ÓÁÐ
-	* @param endpoint               ½ÓÊÜµÄ¶Ë¿ÚºÅ
+	* @param io_service             ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë·ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	* @param endpoint               ï¿½ï¿½ï¿½ÜµÄ¶Ë¿Úºï¿½
 	*/
 	chat_server(int port) :
 		acceptor_(*io_service_, tcp::endpoint(tcp::v4(), port))
@@ -147,9 +147,9 @@ public:
 	}
 
 	/**
-	* @brief                      ·µ»ØÒ»¸ö·þÎñ¶ËÖ¸Õë
+	* @brief                      ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½
 	*
-	* @param port                 ¶ÁÈ¡µÄ¶Ë¿ÚºÅ
+	* @param port                 ï¿½ï¿½È¡ï¿½Ä¶Ë¿Úºï¿½
 	*/
 	static chat_server *create(int port = 1024) {
 		auto s = new chat_server(port);
@@ -161,7 +161,7 @@ public:
 	}
 	
 	/**
-	* @brief                        ·¢ËÍ¸ø¿Í»§¶ËµÄÍæ¼Ò³õÊ¼ÐÅÏ¢
+	* @brief                        ï¿½ï¿½ï¿½Í¸ï¿½ï¿½Í»ï¿½ï¿½Ëµï¿½ï¿½ï¿½Ò³ï¿½Ê¼ï¿½ï¿½Ï¢
 	*
 	*/
 	void button_start()
@@ -184,7 +184,7 @@ public:
 	}
 private:
 	/**
-	* @brief                        Òì²½³¢ÊÔ½ÓÊÜÀ´×Ô¿Í»§¶ËµÄ½ÓÊÜÇëÇó
+	* @brief                        ï¿½ì²½ï¿½ï¿½ï¿½Ô½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¿Í»ï¿½ï¿½ËµÄ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	*
 	*/
 	void do_accept()
@@ -207,7 +207,7 @@ private:
 	}
 	
 	/**
-	* @brief                        ¸ø¿Í»§¶ËÍ¬²½·¢ËÍÐÅÏ¢
+	* @brief                        ï¿½ï¿½ï¿½Í»ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	*
 	*/
 	void loop_process()
@@ -229,13 +229,13 @@ private:
 				r->write_data(game_msg);
 		}
 	}
-	std::vector<TcpConnection::pointer> connections_;           //´æ·ÅtcpÁ¬½ÓµÄÈÝÆ÷
-	static asio::io_service * io_service_;                      //¸ø·þÎñ¶ËµÄÒ»¸ö
-	tcp::acceptor acceptor_;                                    //½ÓÊÜÆ÷
-	std::thread *thread_, *button_thread_{ nullptr };           //¿ªÊ¼ÓÎÏ·ÐÅÏ¢Ð´ÈëµÄ½ø³Ì
-	std::mutex delete_mutex_;                                   //Ëø
-	bool error_flag_{ false };                                  //´íÎó±êÖ¾
-	std::condition_variable data_cond_;                         //Ìõ¼þ±äÁ¿
+	std::vector<TcpConnection::pointer> connections_;           //ï¿½ï¿½ï¿½tcpï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½
+	static asio::io_service * io_service_;                      //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½Ò»ï¿½ï¿½
+	tcp::acceptor acceptor_;                                    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	std::thread *thread_, *button_thread_{ nullptr };           //ï¿½ï¿½Ê¼ï¿½ï¿½Ï·ï¿½ï¿½Ï¢Ð´ï¿½ï¿½Ä½ï¿½ï¿½ï¿½
+	std::mutex delete_mutex_;                                   //ï¿½ï¿½
+	bool error_flag_{ false };                                  //ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾
+	std::condition_variable data_cond_;                         //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	//chat_room room_;
 };
 #endif

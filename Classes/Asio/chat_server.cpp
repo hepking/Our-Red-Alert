@@ -13,7 +13,7 @@ asio::io_service* chat_server::io_service_ = new asio::io_service;
 
 TcpConnection::pointer TcpConnection::create(asio::io_service& io_service, chat_server * parent)
 {
-	//返回一个引用计数的指针
+	//杩斿洖涓�涓紩鐢ㄨ鏁扮殑鎸囬拡
 	return pointer(new TcpConnection(io_service, parent));
 }
 
@@ -28,7 +28,7 @@ tcp::socket& TcpConnection::socket()
 
 void TcpConnection::start()
 {
-	//不断读取数据
+	//涓嶆柇璇诲彇鏁版嵁
 	asio::async_read(socket_,
 		asio::buffer(read_msg_.data(), chat_message::header_length),
 		std::bind(&TcpConnection::handle_read_header, this,

@@ -5,72 +5,70 @@
 
 #include "Unit.h"
 
-class Dog : public Unit
-{
+class Dog : public Unit{
 public:
 	static Dog* create(const std::string& filename);
 	/**
-	*¸ù¾İ_directionÀ´²¥·Å¶ÔÓ¦µÄ¶¯»­
+	*æ ¹æ®_directionæ¥æ’­æ”¾å¯¹åº”çš„åŠ¨ç”»
 	*/
 	void playMoveAnimation();
 	/**
-	*ÅĞ¶Ï·½ÏòÊÇ·ñ·¢Éú±ä»¯
+	*åˆ¤æ–­æ–¹å‘æ˜¯å¦å‘ç”Ÿå˜åŒ–
 	*/
 	bool checkDirectionChange(Vec2 direction);
 private:
 	/**
-	*ÏÖÔÚmoveµÄ·½Ïò
+	*ç°åœ¨moveçš„æ–¹å‘
 	*/
 	int _direction = 0;
 	/**
-	*ÉÏÒ»²½moveµÄ·½Ïò
+	*ä¸Šä¸€æ­¥moveçš„æ–¹å‘
 	*/
 	int _preDirection = 0;
 	/**
-	*ÖØĞ´move() ¸ù¾İmomve·½Ïò²¥·Å¶¯»­
+	*é‡å†™move() æ ¹æ®momveæ–¹å‘æ’­æ”¾åŠ¨ç”»
 	*/
 	void move() override;
 
 	void setProperties() override;
 };
-class Fighter : public Unit
-{
+
+class Fighter : public Unit{
 public:
 	static Fighter* create(const std::string& filename);
 	/**
-	*¸ù¾İmoveµÄ·½Ïò»ñµÃĞèÒªĞı×ªµÄ½Ç¶È
+	*æ ¹æ®moveçš„æ–¹å‘è·å¾—éœ€è¦æ—‹è½¬çš„è§’åº¦
 	*/
 	float getRotation(Vec2 direction);
 	/**
-	*ÖØĞ´findPath Ñ°ÕÒºöÂÔ¸ñµãÕ¼ÓÃµÄÂ·¾¶
+	*é‡å†™findPath å¯»æ‰¾å¿½ç•¥æ ¼ç‚¹å ç”¨çš„è·¯å¾„
 	*/
 	GridPath findPath(const GridPoint& dest)const override;
 
 private:
 	void setProperties() override;
-	//ÖØĞ´move ÊµÏÖ¡°·ÉĞĞ(ÒÆ¶¯²»Õ¼ÓÃ¸ñµã)¡±¹¦ÄÜ,²¢¸ù¾İ·½ÏòĞı×ª
+	//é‡å†™move å®ç°â€œé£è¡Œ(ç§»åŠ¨ä¸å ç”¨æ ¼ç‚¹)â€åŠŸèƒ½,å¹¶æ ¹æ®æ–¹å‘æ—‹è½¬
 	void move() override;
 };
 
 
-class Tank : public Unit
-{
+class Tank : public Unit{
 public:
 	static Tank* create(const std::string& filename);
 	/**
-	*¸ù¾İmoveµÄ·½Ïò»ñµÃĞèÒªĞı×ªµÄ½Ç¶È
+	*æ ¹æ®moveçš„æ–¹å‘è·å¾—éœ€è¦æ—‹è½¬çš„è§’åº¦
 	*/
 	float getRotation(Vec2 direction);
 
 private:
 
 	void setProperties() override;
-	//ÖØĞ´move ¸ù¾İmove·½ÏòĞı×ª
+	//é‡å†™move æ ¹æ®moveæ–¹å‘æ—‹è½¬
 	void move() override;
 };
 
-class Soldier : public Unit
-{
+// å£«å…µ
+class Soldier : public Unit{
 public:
 	static Soldier* create(const std::string& filename);
 private:

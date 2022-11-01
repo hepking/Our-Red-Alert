@@ -1,6 +1,6 @@
 //
 // chat_client.cpp
-// ½è¼øÁËasio¿â¹ÙÍødemo
+// å€Ÿé‰´äº†asioåº“å®˜ç½‘demo
 //
 // Copyright (c) 2003-2018 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
@@ -26,15 +26,14 @@ typedef std::deque<chat_message> chat_message_queue;
 
 //----------------------------------------------------------------------------
 
-/* @brief                        ´´½¨Ò»¸ö¿Í»§¶Ë
+/* @brief                        åˆ›å»ºä¸€ä¸ªå®¢æˆ·ç«¯
 *
 *
 */
-class chat_client
-{
+class chat_client{
 public:
 	
-	//¸¨Öúº¯ÊıÓÃÓÚ·µ»Ø³ÉÔ±
+	//è¾…åŠ©å‡½æ•°ç”¨äºè¿”å›æˆå‘˜
 	bool error()const { return error_flag_; };
 	void close() { do_close(); };
 	bool started() const { return start_flag_; };
@@ -56,13 +55,12 @@ public:
 	}
 
 	/**
-	* @brief                        ´´½¨Ò»¸ö¿Í»§¶ËÁ¬½Ó
+	* @brief                        åˆ›å»ºä¸€ä¸ªå®¢æˆ·ç«¯è¿æ¥
 	*
-	* @param io_service             ¸ø¿Í»§¶Ë·ÖÅäÒ»¸öÈÎÎñ¶ÓÁĞ
-	* @param port                   Òª½ÓÈëµÄ·şÎñ¶Ë¶Ë¿ÚºÅ
+	* @param io_service             ç»™å®¢æˆ·ç«¯åˆ†é…ä¸€ä¸ªä»»åŠ¡é˜Ÿåˆ—
+	* @param port                   è¦æ¥å…¥çš„æœåŠ¡ç«¯ç«¯å£å·
 	*/
-	static chat_client * create(std::string ip = "127.0.0.1", int port=1024)
-	{
+	static chat_client * create(std::string ip = "127.0.0.1", int port=1024){
 		auto s = new chat_client(ip, port);
 		s->thread_=new std::thread(
 		std::bind(static_cast<std::size_t (asio::io_context::*)()>(&asio::io_context::run),
@@ -71,28 +69,25 @@ public:
 	}
 
 	/**
-	* @brief                        ¿Í»§¶Ë¹¹Ôìº¯Êı
+	* @brief                        å®¢æˆ·ç«¯æ„é€ å‡½æ•°
 	*
-	* @param io_service             ¸ø¿Í»§¶Ë·ÖÅäÒ»¸öÈÎÎñ¶ÓÁĞ
-	* @param port                 ÒªÁ¬½ÓµÄ¶Ë¿ÚºÅ
+	* @param io_service             ç»™å®¢æˆ·ç«¯åˆ†é…ä¸€ä¸ªä»»åŠ¡é˜Ÿåˆ—
+	* @param port                 è¦è¿æ¥çš„ç«¯å£å·
 	*/
 	chat_client(std::string ip,int port): socket_(io_context_),
-		endpoint_(asio::ip::address_v4::from_string(ip),port)
-	{
+		endpoint_(asio::ip::address_v4::from_string(ip),port){
 		do_connect();
 	}
 	
 	/**
-	* @brief                        Ğ´ÈëÄÚÈİ
+	* @brief                        å†™å…¥å†…å®¹
 	*
 	*/
-	void write_data(std::string s)
-	{
+	void write_data(std::string s){
 		if (error_flag_)
 			return;
 		chat_message msg;
-		if (s.size() == 0)
-		{
+		if (s.size() == 0){
 			s = std::string("\0");
 			msg.body_length(1);
 		}
@@ -105,11 +100,10 @@ public:
 	}
 
 	/**
-	* @brief                        ¶ÁÈ¡ÄÚÈİ
+	* @brief                        è¯»å–å†…å®¹
 	*
 	*/
-	std::string read_data()
-	{
+	std::string read_data(){
 		if (error_flag_)
 			return "";
 		std::unique_lock<std::mutex> lk{ mut };
@@ -124,7 +118,7 @@ public:
 		return ret;
 	}
 private:
-	//ÒÔÏÂÄÚÈİºÍTcpConnectionÒ»Ñù...
+	//ä»¥ä¸‹å†…å®¹å’ŒTcpConnectionä¸€æ ·...
 	void do_connect()
 	{
 		socket_.async_connect(endpoint_,
@@ -138,13 +132,13 @@ private:
 					
 					char data[30] = { 0 };
 					asio::error_code err;
-					//Í¬²½¶ÁÈ¡,ÊÇ×èÈûµÄ
+					//åŒæ­¥è¯»å–,æ˜¯é˜»å¡çš„
 					size_t length = socket_.read_some(asio::buffer(data, 30), err);
 					std::cout << data<<std::endl;
 
 					if (err || length < 10)	
 						throw asio::system_error(err);
-					/*½âÎöµÚÒ»´ÎÊÕµ½µÄÖ¸Áî,ÒòÎªÊÇÍ¬²½µÄ,±£Ö¤ÁËÂÖÁ÷½ÓÊÜ*/
+					/*è§£æç¬¬ä¸€æ¬¡æ”¶åˆ°çš„æŒ‡ä»¤,å› ä¸ºæ˜¯åŒæ­¥çš„,ä¿è¯äº†è½®æµæ¥å—*/
 					char header[4 + 1] = "";
 					strncat(header, data + 10, 4);
 					total_ = atoi(header);

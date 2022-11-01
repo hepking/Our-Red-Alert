@@ -24,7 +24,7 @@ bool PreLoad::init() {
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	/* ÉèÖÃ±³¾°Í¼Æ¬ */
+	/* è®¾ç½®èƒŒæ™¯å›¾ç‰‡ */
 	auto back_ground = Sprite::create("Picture/background/background3.png");
 	back_ground->setPosition(origin + visibleSize / 2);
 	back_ground->setScaleX(visibleSize.width / back_ground->getContentSize().width);
@@ -37,7 +37,7 @@ bool PreLoad::init() {
 	bar_back_ground_sprite->setPosition(Vec2(visibleSize.width / 2, visibleSize.height * 0.15));
 	this->addChild(bar_back_ground_sprite);
 
-	/*ÉèÖÃ_progressµÄ¸÷Ïî²ÎÊý*/
+	/*è®¾ç½®_progressçš„å„é¡¹å‚æ•°*/
 	_progress = ProgressTimer::create(bar_sprite);
 	_progress->setPercentage(0.0f);
 	_progress->setScale(2);
@@ -47,7 +47,7 @@ bool PreLoad::init() {
 	_progress->setPosition(visibleSize.width / 2, visibleSize.height * 0.15);
 	this->addChild(_progress);
 
-	/* Ìí¼Ó±êÇ© */
+	/* æ·»åŠ æ ‡ç­¾ */
 	Label *label = Label::createWithTTF("Loading...", "fonts/Marker Felt.ttf", 45);
 	Size size = Director::getInstance()->getVisibleSize();
 	label->setPosition(Vec2(size.width / 2, size.height * 0.23));
@@ -57,7 +57,7 @@ bool PreLoad::init() {
 }
 
 void PreLoad::onEnterTransitionDidFinish() {
-	//¶ÁÈ¡preloadResourcesÎÄ¼þÖÐµÄÓÎÏ·×ÊÔ´Ãû³ÆÁÐ±í
+	//è¯»å–preloadResourcesæ–‡ä»¶ä¸­çš„æ¸¸æˆèµ„æºåç§°åˆ—è¡¨
 	ValueMap map = FileUtils::getInstance()->getValueMapFromFile("preloadResources.plist");
 	ValueVector spriteSheets = map.at("SpriteSheets").asValueVector();
 	ValueVector effects = map.at("Sounds").asValueVector();
@@ -65,7 +65,7 @@ void PreLoad::onEnterTransitionDidFinish() {
 	ValueVector animation = map.at("Animotions").asValueVector();
 
 	_sourceCount = spriteSheets.size() + effects.size() + musics.size() + animation.size();
-	// ÉèÖÃ½ø¶ÈÌõ¸üÐÂ¼ä¸ô=100/ÐèÒª¼ÓÔØµÄ×ÊÔ´ÊýÁ¿
+	// è®¾ç½®è¿›åº¦æ¡æ›´æ–°é—´éš”=100/éœ€è¦åŠ è½½çš„èµ„æºæ•°é‡
 	_progressInterval = 100 / _sourceCount;
 
 	loadMusic(musics);
@@ -270,10 +270,10 @@ void PreLoad::progressUpdate() {
 		_progress->setPercentage(100.0f - (_progressInterval * _sourceCount));
 	}
 	else {
-		// ÒÔ½¥½øµÄ·½Ê½ÏÔÊ¾Í¼Æ¬,Ã¿´Î¶¯×÷³ÖÐø0.5s
+		// ä»¥æ¸è¿›çš„æ–¹å¼æ˜¾ç¤ºå›¾ç‰‡,æ¯æ¬¡åŠ¨ä½œæŒç»­0.5s
 		auto display_action = ProgressFromTo::create(0.5f, _progress->getPercentage(), 100);
 		auto call_function = CallFunc::create([=] {
-			// µ±¼ÓÔØ×ÊÔ´Íê³É£¬ÑÓ³Ù1ÃëÌø×ªµ½ÓÎÏ·Ö÷³¡¾°
+			// å½“åŠ è½½èµ„æºå®Œæˆï¼Œå»¶è¿Ÿ1ç§’è·³è½¬åˆ°æ¸¸æˆä¸»åœºæ™¯
 			auto delay = DelayTime::create(1.0f);
 			auto call_function = CallFunc::create([] {
 				Director::getInstance()->replaceScene(GameMenu::createScene());

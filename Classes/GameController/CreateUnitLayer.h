@@ -8,63 +8,62 @@ USING_NS_CC;
 class Building;
 
 /**
-*������λ�˵��Ļ���,�̳���Layer
+*创建单位菜单的基类,继承自Layer
 */
-class CreateUnitLayer :public cocos2d::Layer
-{
+class CreateUnitLayer :public cocos2d::Layer{
 private:
 	Point center_position;
 public:	
 	/**
-	*��������ʱ����ʾ����
+	*创建建筑时的提示矩形
 	*/
 	Sprite * rec = nullptr;
 	/**
-	*��ʾ���εĴ�С,����Ҫ���������Ĵ�С�仯
+	*提示矩形的大小,根据要创建建筑的大小变化
 	*/
 	Size rec_size;
 	/**
-	*��ʾ���ε�����λ��(�������Ļ,�����λ�ö�Ӧ)
+	*提示矩形的中心位置(相对于屏幕,与鼠标位置对应)
 	*/
 	Point rec_center;
 	/**
-	*��ʾ���ε�����λ��(�������Ƭ��ͼ,�봴��λ�ö�Ӧ)
+	*提示矩形的中心位置(相对于瓦片地图,与创建位置对应)
 	*/
 	Point rec_abs_center;
 	/**
-	*�˵�����Ӧ�Ľ���
+	*菜单所对应的建筑
 	*/
 	Building* center = nullptr;
 	/**
-	*��ʾ�õ�λ�����Ƿ񴴽�(��������Ǯ��������)
+	*表示该单位可以是否创建(电力、金钱满足条件)
 	*/
 	bool building = false;
 	/**
-	*��ʾ�õ�λ�����Ƿ񴴽�(λ����������)
+	*表示该单位可以是否创建(位置满足条件)
 	*/
 	bool can_build = true;
 	/**
-	*��ʾ����ʾ�����Ƿ񱻴���
+	*表示该提示矩形是否被创建
 	*/
 	bool is_rec_created = false;
 	/**
-	*�˵�������,�������Ӹ��ְ�ť
+	*菜单的容器,用于添加各种按钮
 	*/
 	Layout * layout;
 	/**
-	*����ʾ�������Ӽ����¼�,�����������ʹ�����Ϣ
+	*给提示矩形添加监听事件,如果被点击则发送创建信息
 	*/
 	void addListenerToRect(int type);
 	/**
-	*����Ǯ�������Ƿ��㹻����
+	*检查金钱、电力是否足够建造
 	*/
 	bool checkBuilding(int money, int power);
 	/**
-	*�����Ǯ�����죬��ִ�иú���������rec���ж��Ƿ���Դ���������򴴽�type�Ľ���
+	*如果金钱够建造，则执行该函数：创建rec，判断是否可以创建，点击则创建type的建筑
 	*/
 	void onBuilding(int type,Size size);
 	/**
-	*�ж���ʾ�����Ƿ��ڽ��췶Χ��
+	*判断提示矩形是否在建造范围内
 	*/
 	bool checkInRange(Point p);
 
@@ -85,7 +84,7 @@ public:
 	static BaseLayer * create();
 
 	/**
-	*���ô����˵�����ť�Ŀ�����
+	*设置创建菜单各按钮的可用性
 	*/
 	void setEnable(bool able);
 };

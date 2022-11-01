@@ -20,8 +20,8 @@ void CombatScene::DrawRectArea(Point p1, Point p2)
 	drawNode->drawRect(p1, p2, Color4F(0, 1, 0, 1));
 }
 
-//½«¿òÖÐµÄÓÑ·½µ¥Î»¼ÓÈëselected_ids
-//p1,p2ÊÇÏà¶ÔÓÚµØÍ¼µÄ×ø±ê
+//å°†æ¡†ä¸­çš„å‹æ–¹å•ä½åŠ å…¥selected_ids
+//p1,p2æ˜¯ç›¸å¯¹äºŽåœ°å›¾çš„åæ ‡
 void CombatScene::getLayerUnit(Point p1, Point p2)
 {
 	const auto&arrayNode = this->_combat_map->getChildren();
@@ -68,11 +68,11 @@ bool CombatScene::init(chat_server * server_context_, chat_client * client_conte
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	/*¼ÓÔØ¿Í»§¶ËºÍ·þÎñ¶Ë*/
+	/*åŠ è½½å®¢æˆ·ç«¯å’ŒæœåŠ¡ç«¯*/
 	server_side = server_context_;
 	client_side = client_context_;
 
-	/*ÁÄÌìÊäÈë´°¿Ú*/
+	/*èŠå¤©è¾“å…¥çª—å£*/
 	auto chat_in_box = EditBox::create(Size(300, 60), Scale9Sprite::create("Picture/slider/button.png"), Scale9Sprite::create("Picture/slider/button.png"), Scale9Sprite::create("Picture/slider/button.png"));
 	chat_in_box->setPosition(Vec2(origin.x + visibleSize.width * 0.9, origin.y + visibleSize.height * 0.1));
 	chat_in_box->setFontName("/fonts/Marker Felt.ttf");
@@ -81,14 +81,14 @@ bool CombatScene::init(chat_server * server_context_, chat_client * client_conte
 	chat_in_box->setTag(1);
 	this->addChild(chat_in_box, 2);
 
-	/*ÁÄÌìÊä³ö´°¿Ú*/
+	/*èŠå¤©è¾“å‡ºçª—å£*/
 	auto chat_out_box = Text::create("Input the chat message ", "Arial", 20);
 	chat_out_box->setPosition(Vec2(origin.x + visibleSize.width * 0.9, origin.y + visibleSize.height * 0.2));
 	chat_out_box->setTextHorizontalAlignment(TextHAlignment::CENTER);
 	chat_out_box->setTag(2);
 	this->addChild(chat_out_box, 2);
 
-	/* ¼ÓÔØµØÍ¼ */
+	/* åŠ è½½åœ°å›¾ */
 	if (client_side->map() == 1) {
 		_combat_map = TMXTiledMap::create("map/BasicMap1.tmx");
 	}
@@ -98,11 +98,11 @@ bool CombatScene::init(chat_server * server_context_, chat_client * client_conte
 	_combat_map->setAnchorPoint(Vec2(0, 0));
 	addChild(_combat_map, 0);
 
-	/* ¼ÓÔØ¸ñµãµØÍ¼ */
+	/* åŠ è½½æ ¼ç‚¹åœ°å›¾ */
 	_grid_map = GridMap::create(_combat_map);
 	_grid_map->retain();
 
-	/*¼ÓÔØÐ¡µØÍ¼*/
+	/*åŠ è½½å°åœ°å›¾*/
 	mini_map = Minimap::create("map/minimap2.png");
 	if (client_side->map() == 1) {
 		mini_map = Minimap::create("map/minimap1.png");
@@ -114,12 +114,12 @@ bool CombatScene::init(chat_server * server_context_, chat_client * client_conte
 	mini_map->setPosition(0, 0);
 	addChild(mini_map);
 
-	/*¼ÓÔØ¾ØÐÎÑ¡¿ò¶ÔÏó*/
+	/*åŠ è½½çŸ©å½¢é€‰æ¡†å¯¹è±¡*/
 	mouse_rect = MouseRect::create();
 	mouse_rect->setVisible(false);
 	_combat_map->addChild(mouse_rect, 15);
 
-	/*¼ÓÔØ½ðÇ®Layer*/
+	/*åŠ è½½é‡‘é’±Layer*/
 	auto moneyDisplay = Sprite::create("Picture/display/MoneyDisplay.png");
 	addChild(moneyDisplay);
 	moneyDisplay->setScale(0.2);
@@ -130,7 +130,7 @@ bool CombatScene::init(chat_server * server_context_, chat_client * client_conte
 	money->setPosition(visibleSize.width - 130, visibleSize.height - 30);
 	money->schedule(schedule_selector(Money::update));
 
-	/*¼ÓÔØµçÁ¦Ìõpower*/
+	/*åŠ è½½ç”µåŠ›æ¡power*/
 	auto powerSprite = Sprite::create("Picture/display/powerDisplay.png");
 	addChild(powerSprite);
 	powerSprite->setScale(0.2);
@@ -138,7 +138,7 @@ bool CombatScene::init(chat_server * server_context_, chat_client * client_conte
 	power = Power::create();
 	addChild(power, 40);
 
-	/* ¼ÓÔØµçÁ¦ÌõµÄÏÔÊ¾ */
+	/* åŠ è½½ç”µåŠ›æ¡çš„æ˜¾ç¤º */
 	power->setPosition(visibleSize.width - 190, visibleSize.height - 95);
 	PowerDisplay* powerDisplay = PowerDisplay::create();
 	powerDisplay->setScale(2);
@@ -147,7 +147,7 @@ bool CombatScene::init(chat_server * server_context_, chat_client * client_conte
 	power->powerDisplay = powerDisplay;
 	power->updatePowerDisplay();
 
-	/* ÉèÖÃÓÎÏ·¿ØÖÆÆ÷ */
+	/* è®¾ç½®æ¸¸æˆæŽ§åˆ¶å™¨ */
 	msgs = new GameMessageSet;
 	unit_manager = UnitManager::create();
 	unit_manager->retain();
@@ -160,16 +160,16 @@ bool CombatScene::init(chat_server * server_context_, chat_client * client_conte
 	unit_manager->setSocketClient(client_side);
 	unit_manager->setPlayerNum(client_side);
 
-#ifdef DEBUG//²âÊÔ
+#ifdef DEBUG//æµ‹è¯•
 	auto farmer_sprite = Unit::create("Picture/display/buildingrec.png");
 	farmer_sprite->setVisible(false);
 	farmer_sprite->setPosition(Vec2(visibleSize.width / 2 + 100, visibleSize.height / 2));
 	this->_combat_map->addChild(farmer_sprite, 10);
 #endif
-	/*Ë¢ÐÂ½ÓÊÜ¹öÂÖÏìÓ¦*/
+	/*åˆ·æ–°æŽ¥å—æ»šè½®å“åº”*/
 	schedule(schedule_selector(CombatScene::update));
 
-	/* µÃµ½Êó±êÃ¿Ò»Ö¡µÄÎ»ÖÃ */
+	/* å¾—åˆ°é¼ æ ‡æ¯ä¸€å¸§çš„ä½ç½® */
 	auto mouse_event = EventListenerMouse::create();
 	mouse_event->onMouseMove = [&](Event *event) {
 
@@ -178,13 +178,13 @@ bool CombatScene::init(chat_server * server_context_, chat_client * client_conte
 	};
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(mouse_event, 1);
 
-	//µÃµ½³õÊ¼»¯µ¥Î»
+	//å¾—åˆ°åˆå§‹åŒ–å•ä½
 	unit_manager->setPlayerID(client_side->camp());
 	//unit_manager->setPlayerID(2);
 	unit_manager->initializeUnitGroup();
 
 
-	/*¼ÓÔØ¾«Áé¼àÌýÆ÷ÊÂ¼þ*/
+	/*åŠ è½½ç²¾çµç›‘å¬å™¨äº‹ä»¶*/
 	auto spriteListener = EventListenerTouchOneByOne::create();
 	spriteListener->setSwallowTouches(true);
 	spriteListener->onTouchBegan = [this](Touch* touch, Event* event) {
@@ -210,7 +210,7 @@ bool CombatScene::init(chat_server * server_context_, chat_client * client_conte
 	Director::getInstance()->getEventDispatcher()
 		->addEventListenerWithSceneGraphPriority(spriteListener, farmer_sprite);
 #endif
-	/*¼ÓÔØ²ã¼àÌýÆ÷Ê±¼ä*/
+	/*åŠ è½½å±‚ç›‘å¬å™¨æ—¶é—´*/
 	destListener = EventListenerTouchOneByOne::create();
 	destListener->onTouchBegan = [this](Touch* touch, Event* event) {
 		mouse_rect->touch_start = touch->getLocation();
@@ -219,7 +219,7 @@ bool CombatScene::init(chat_server * server_context_, chat_client * client_conte
 		if (mouse_rect->touch_start.x > mini_map->mini_width
 			|| mouse_rect->touch_start.y > mini_map->mini_height) {
 			/***************************/
-			/*×ª»¯³ÉµØÍ¼ÉÏµÄ×ø±ê*/
+			/*è½¬åŒ–æˆåœ°å›¾ä¸Šçš„åæ ‡*/
 			mouse_rect->touch_end = touch->getLocation();
 			mouse_rect->touch_end_map = mouse_rect->touch_end - cdelta;
 			/***************************/
@@ -256,28 +256,28 @@ bool CombatScene::init(chat_server * server_context_, chat_client * client_conte
 	};
 
 	destListener->onTouchMoved = [this](Touch* touch, Event* event) {
-		mouse_rect->touch_end = touch->getLocation();//¸üÐÂ×îºó½Ó´¥µÄµã
+		mouse_rect->touch_end = touch->getLocation();//æ›´æ–°æœ€åŽæŽ¥è§¦çš„ç‚¹
 		mouse_rect->touch_end_map = mouse_rect->touch_end - cdelta;
 		mouse_rect->setVisible(true);
 	};
 
-	/*¼ÓÔØ¿òÑ¡¼àÌýÆ÷Ê±¼ä*/
+	/*åŠ è½½æ¡†é€‰ç›‘å¬å™¨æ—¶é—´*/
 	destListener->onTouchEnded = [this](Touch* touch, Event* event) {
 		if (mouse_rect->isScheduled(schedule_selector(MouseRect::update)))
 			mouse_rect->unschedule(schedule_selector(MouseRect::update));
-		/*¸üÐÂµã»÷Î»ÖÃ*/
+		/*æ›´æ–°ç‚¹å‡»ä½ç½®*/
 		mouse_rect->touch_end = touch->getLocation();
 		mouse_rect->touch_end_map = mouse_rect->touch_end - cdelta;
 		mouse_rect->setVisible(false);
-		//Èç¹ûÊÇ¿òÑ¡¶ø·ÇµãÑ¡ÔòÇå¿Õselecetd_ids
+		//å¦‚æžœæ˜¯æ¡†é€‰è€Œéžç‚¹é€‰åˆ™æ¸…ç©ºselecetd_ids
 		if (Tri_Dsitance(mouse_rect->touch_start, mouse_rect->touch_end) > 8) {
 			unit_manager->cancellClickedUnit();
 		}
-		//Èç¹ûÊÇµãÑ¡£¬ÔòÖ´ÐÐselecctEmpty
+		//å¦‚æžœæ˜¯ç‚¹é€‰ï¼Œåˆ™æ‰§è¡ŒselecctEmpty
 		if (unit_manager->selected_ids.size()) {
 			unit_manager->selectEmpty(mouse_rect->touch_end - cdelta);
 		}
-		//Èç¹ûÊÇ¿òÑ¡£¬¾Í½«¿òÖÐËùÓÐµÄ¼º·½µ¥Î»Ìí¼Óµ½selected_ids²¢Ö´ÐÐ²Ù×÷
+		//å¦‚æžœæ˜¯æ¡†é€‰ï¼Œå°±å°†æ¡†ä¸­æ‰€æœ‰çš„å·±æ–¹å•ä½æ·»åŠ åˆ°selected_idså¹¶æ‰§è¡Œæ“ä½œ
 		else {
 			if (mouse_rect->isScheduled(schedule_selector(MouseRect::update))) {
 				mouse_rect->unschedule(schedule_selector(MouseRect::update));
@@ -290,7 +290,7 @@ bool CombatScene::init(chat_server * server_context_, chat_client * client_conte
 		->addEventListenerWithSceneGraphPriority(destListener, this->_combat_map);
 
 	
-	/*¼ÓÔØ°´¼ü¼àÌýÆ÷ÊÂ¼þ*/
+	/*åŠ è½½æŒ‰é”®ç›‘å¬å™¨äº‹ä»¶*/
 	letterListener = EventListenerKeyboard::create();
 	letterListener->onKeyPressed = [this](EventKeyboard::KeyCode keycode, Event * event) {
 		keys[keycode] = true;
@@ -301,7 +301,7 @@ bool CombatScene::init(chat_server * server_context_, chat_client * client_conte
 	Director::getInstance()->getEventDispatcher()
 		->addEventListenerWithSceneGraphPriority(letterListener, this->_combat_map);
 	
-	/*¼ÓÔØ°´¼ü¼àÌýÆ÷ÊÂ¼þ*/
+	/*åŠ è½½æŒ‰é”®ç›‘å¬å™¨äº‹ä»¶*/
 	letterListener = EventListenerKeyboard::create();
 	letterListener->onKeyPressed = [this](EventKeyboard::KeyCode keycode, Event * event) {
 		keys[keycode] = true;
@@ -322,7 +322,7 @@ void CombatScene::focusOnBase() {
 	Vec2 base_vec = Point(0, 0) + visibleSize / 2 - base_point;
 	cdelta += base_vec;
 
-	/* Èç¹ûÒÔ»ùµØÎªÖÐÐÄµÄÊÓÒ°³¬³öÁËTiledMapµÄ´óÐ¡ */
+	/* å¦‚æžœä»¥åŸºåœ°ä¸ºä¸­å¿ƒçš„è§†é‡Žè¶…å‡ºäº†TiledMapçš„å¤§å° */
 	if (cdelta.x >0) {
 		cdelta.x = 0;
 	}
@@ -407,7 +407,7 @@ void CombatScene::dragMap() {
 			case EventKeyboard::KeyCode::KEY_ENTER: {
 				auto chat_out_box = static_cast<ui::EditBox*>(this->getChildByTag(1));
 				std::string value = chat_out_box->getText();
-				// Èç¹ûÊý¾Ý´óÓÚ0£¬ÏÔÊ¾ÔÚ_messageValueLabelµ±ÖÐ
+				// å¦‚æžœæ•°æ®å¤§äºŽ0ï¼Œæ˜¾ç¤ºåœ¨_messageValueLabelå½“ä¸­
 				if (value.length() > 0)
 				{
 					auto new_msg = msgs->add_game_message();

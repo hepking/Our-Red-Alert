@@ -4,8 +4,10 @@
 #ifndef COMBAT_SCENE_H_
 #define COMBAT_SCENE_H_
 #define DEBUG
+
 #include "asio.hpp"
 #include"Unit.h"
+
 #include <cocos2d.h>
 #include<vector>
 #include "GameMessage.pb.h"
@@ -15,27 +17,25 @@
 USING_NS_CC;
 
 /**
-	* @brief MouseRectÀà¼Ì³Ğ×ÔDrawNodeÀà
-	* @ÓÃÓÚ¼ÓÔØÓÎÏ·ÖĞµÄÑ¡¿òµÄ»æÖÆºÍ²Ù×÷
+	* @brief MouseRectç±»ç»§æ‰¿è‡ªDrawNodeç±»
+	* @ç”¨äºåŠ è½½æ¸¸æˆä¸­çš„é€‰æ¡†çš„ç»˜åˆ¶å’Œæ“ä½œ
 */
-class MouseRect : public cocos2d::DrawNode
-{
+class MouseRect : public cocos2d::DrawNode{
 public:
-	cocos2d::Point touch_start, touch_end;				//´¥ÃşÊÂ¼şµÄÆğÊ¼µãºÍÖÕµã
-	cocos2d::Point touch_start_map, touch_end_map;		//¶ÔÓ¦ÓÚÓÎÏ·µØÍ¼µÄÆğÊ¼µãÓëÖÕµã
+	cocos2d::Point touch_start, touch_end;				//è§¦æ‘¸äº‹ä»¶çš„èµ·å§‹ç‚¹å’Œç»ˆç‚¹
+	cocos2d::Point touch_start_map, touch_end_map;		//å¯¹åº”äºæ¸¸æˆåœ°å›¾çš„èµ·å§‹ç‚¹ä¸ç»ˆç‚¹
 
 /**
-	* @brief ÓÃÓÚË¢ĞÂÑ¡¿òµÄÏÔÊ¾
+	* @brief ç”¨äºåˆ·æ–°é€‰æ¡†çš„æ˜¾ç¤º
 	*/
 	void update(float f) override;
 };
 
 /**
-	* @brief PowerDisplayÀà¼Ì³Ğ×ÔLabelÀà
-	* @ÓÃÓÚÏÔÊ¾²¢Ë¢ĞÂÓÎÏ·ÖĞµÄµçÁ¦Êı¾İ
+	* @brief PowerDisplayç±»ç»§æ‰¿è‡ªLabelç±»
+	* @ç”¨äºæ˜¾ç¤ºå¹¶åˆ·æ–°æ¸¸æˆä¸­çš„ç”µåŠ›æ•°æ®
 */
-class PowerDisplay : public Label	
-{
+class PowerDisplay : public Label{
 public:
 	bool init() override;
 	void updateDisplay(Power * power);
@@ -43,63 +43,62 @@ public:
 };
 
 /**
-	* @brief PowerÀà¼Ì³Ğ×ÔDrawNodeÀà
-	* @ÓÃÓÚÏÔÊ¾²¢Ë¢ĞÂÓÎÏ·ÖĞµÄµçÁ¦Ìõ
+	* @brief Powerç±»ç»§æ‰¿è‡ªDrawNodeç±»
+	* @ç”¨äºæ˜¾ç¤ºå¹¶åˆ·æ–°æ¸¸æˆä¸­çš„ç”µåŠ›æ¡
 */
-class Power : public DrawNode
-{
+class Power : public DrawNode{
 private:
-	int max_power = INITIAL_POWER;				//µçÁ¿ÉÏÏŞ
-	int used_power = 0;							//µ±Ç°Ê¹ÓÃµÄµçÁ¿
+	int max_power = INITIAL_POWER;				//ç”µé‡ä¸Šé™
+	int used_power = 0;							//å½“å‰ä½¿ç”¨çš„ç”µé‡
 
-	int cur_length = 0;							//µ±Ç°µçÁ¦ÌõµÄ³¤¶È
-	int length = 130;							//µçÁ¦ÌõµÄ³¤¶È
-	int width = 35;								//µçÁ¦ÌõµÄ¿í¶È
+	int cur_length = 0;							//å½“å‰ç”µåŠ›æ¡çš„é•¿åº¦
+	int length = 130;							//ç”µåŠ›æ¡çš„é•¿åº¦
+	int width = 35;								//ç”µåŠ›æ¡çš„å®½åº¦
 
-	cocos2d::Color4F red{ 1, 0, 0, 1 };			//ºìÉ«ÏÔÊ¾
-	cocos2d::Color4F yellow{ 1, 1, 0, 1 };		//»ÆÉ«
-	cocos2d::Color4F green{ 0, 1, 0.5, 1 };		//ÂÌÉ«
-	cocos2d::Color4F blue{ 0.1, 0.5, 1, 1 };	//À¶É«
+	cocos2d::Color4F red{ 1, 0, 0, 1 };			//çº¢è‰²æ˜¾ç¤º
+	cocos2d::Color4F yellow{ 1, 1, 0, 1 };		//é»„è‰²
+	cocos2d::Color4F green{ 0, 1, 0.5, 1 };		//ç»¿è‰²
+	cocos2d::Color4F blue{ 0.1, 0.5, 1, 1 };	//è“è‰²
 public:
-	PowerDisplay * powerDisplay = nullptr;		//ÓÃÓÚÍ¬PowerDisplayÀàÍ¨ĞÅµÄÖ¸Õë
+	PowerDisplay * powerDisplay = nullptr;		//ç”¨äºåŒPowerDisplayç±»é€šä¿¡çš„æŒ‡é’ˆ
 
 /**
-	* @brief ÓÃÓÚÔö¼Óµ±Ç°µçÁ¿µÄÉÏÏß
-	* @param delta µçÁ¿µÄÔöÁ¿
+	* @brief ç”¨äºå¢åŠ å½“å‰ç”µé‡çš„ä¸Šçº¿
+	* @param delta ç”µé‡çš„å¢é‡
 	*/
 	void addMax_power(int delta);
 
 /**
-	* @brief ĞÂ½¨½¨ÖşÏûºÄµ±Ç°Ëù²úÉúµÄµçÁ¿
-	* @param delta ¸Ã½¨ÖşÏûºÄµÄµçÁ¿
+	* @brief æ–°å»ºå»ºç­‘æ¶ˆè€—å½“å‰æ‰€äº§ç”Ÿçš„ç”µé‡
+	* @param delta è¯¥å»ºç­‘æ¶ˆè€—çš„ç”µé‡
 	*/
 	void spendPower(int power);
 
 /**
-	* @brief ÉèÖÃµ±Ç°ÏÔÊ¾µçÁ¿ÌõµÄ³¤¶È
+	* @brief è®¾ç½®å½“å‰æ˜¾ç¤ºç”µé‡æ¡çš„é•¿åº¦
 	*/
 	void setCur_length();
 
 /**
-	* @brief ÓÃÓÚ¼ì²éµ±Ç°µçÁ¿ÊÇ·ñÄÜÎªÑ¡ÔñµÄ½¨ÖşÌá¹©µçÁ¦
-	* @param delta Èç¹ûµçÁ¿³ä×ãÔò·µ»Øtrue£¬·´Ö®·µ»Øfalse
+	* @brief ç”¨äºæ£€æŸ¥å½“å‰ç”µé‡æ˜¯å¦èƒ½ä¸ºé€‰æ‹©çš„å»ºç­‘æä¾›ç”µåŠ›
+	* @param delta å¦‚æœç”µé‡å……è¶³åˆ™è¿”å›trueï¼Œåä¹‹è¿”å›false
 	*/
 	bool checkPower(int delta);
 
 /**
-	* @brief ¸ù¾İµ±Ç°µçÁ¿µÄ³äÔ£³Ì¶ÈÉèÖÃÏÔÊ¾ÑÕÉ«
-	* @Èç¹ûµçÁ¿³ä×ãÔòÕ¹Ê¾ÂÌÉ«£¬½ÓÏÂÀ´ÒÀ¾İµçÁ¿³äÅæ³Ì¶ÈÒÀ´ÎÏÔÊ¾ÂÌ¡¢»Æ¡¢ºìÉ«
+	* @brief æ ¹æ®å½“å‰ç”µé‡çš„å……è£•ç¨‹åº¦è®¾ç½®æ˜¾ç¤ºé¢œè‰²
+	* @å¦‚æœç”µé‡å……è¶³åˆ™å±•ç¤ºç»¿è‰²ï¼Œæ¥ä¸‹æ¥ä¾æ®ç”µé‡å……æ²›ç¨‹åº¦ä¾æ¬¡æ˜¾ç¤ºç»¿ã€é»„ã€çº¢è‰²
 	*/
 	Color4F getColor();
 
 /**
-	* @brief ¸üĞÂµçÁ¦ÌõµÄÏÔÊ¾×´Ì¬
+	* @brief æ›´æ–°ç”µåŠ›æ¡çš„æ˜¾ç¤ºçŠ¶æ€
 	*/
 	void updatePowerDisplay();
 
 /**
-	* @brief ÓÑÔªº¯Êı£¬¸üĞÂµçÁ¦ÌõÏÔÊ¾×´Ì¬µÄÍ¬Ê±¸üĞÂµçÁ¦Êı¾İµÄÏÔÊ¾
-	* @param power µçÁ¦Êı¾İ
+	* @brief å‹å…ƒå‡½æ•°ï¼Œæ›´æ–°ç”µåŠ›æ¡æ˜¾ç¤ºçŠ¶æ€çš„åŒæ—¶æ›´æ–°ç”µåŠ›æ•°æ®çš„æ˜¾ç¤º
+	* @param power ç”µåŠ›æ•°æ®
 	*/
 	friend void PowerDisplay::updateDisplay(Power * power);
 
@@ -107,162 +106,161 @@ public:
 };
 
 /**
-	* @brief MoneyÀà¼Ì³Ğ×ÔLabelÀà
-	* @ÓÃÓÚÏÔÊ¾²¢Ë¢ĞÂÓÎÏ·ÖĞµÄ½ğÇ®×ÜÊı
+	* @brief Moneyç±»ç»§æ‰¿è‡ªLabelç±»
+	* @ç”¨äºæ˜¾ç¤ºå¹¶åˆ·æ–°æ¸¸æˆä¸­çš„é‡‘é’±æ€»æ•°
 */
-class Money : public Label
-{
+class Money : public Label{
 public:
 /**
-	* @brief ³õÊ¼»¯½ğÇ®ÏÔÊ¾µÄÊı¾İ
-	* @return ³õÊ¼»¯³É¹¦Ôò·µ»Øtrue£¬·´Ö®false
+	* @brief åˆå§‹åŒ–é‡‘é’±æ˜¾ç¤ºçš„æ•°æ®
+	* @return åˆå§‹åŒ–æˆåŠŸåˆ™è¿”å›trueï¼Œåä¹‹false
 	*/
 	bool init() override;
 
 /**
-	* @brief ¸üĞÂ½ğÇ®ÊıÄ¿
+	* @brief æ›´æ–°é‡‘é’±æ•°ç›®
 	*/
 	void update(float f) override;
 
 /**
-	* @brief ¸üĞÂ½ğÇ®ÊıÁ¿µÄÏÔÊ¾(ÓÉupdateº¯Êı½øĞĞµ÷ÓÃ)
+	* @brief æ›´æ–°é‡‘é’±æ•°é‡çš„æ˜¾ç¤º(ç”±updateå‡½æ•°è¿›è¡Œè°ƒç”¨)
 	*/
 	void updateMoneyDisplay();
 
 /**
-	* @brief ¼ì²é½ğÇ®ÊıÄ¿£¬ÅĞ¶ÏÊ£Óà½ğÇ®ÄÜ·ñÖ§¸¶Ä¿±ê½¨Öş
-	* @param price Ä¿±ê½¨ÖşµÄ¼Û¸ñ
-	* @return Èô×ã¹»Ö§¸¶Ôò·µ»Øture£¬·´Ö®false
+	* @brief æ£€æŸ¥é‡‘é’±æ•°ç›®ï¼Œåˆ¤æ–­å‰©ä½™é‡‘é’±èƒ½å¦æ”¯ä»˜ç›®æ ‡å»ºç­‘
+	* @param price ç›®æ ‡å»ºç­‘çš„ä»·æ ¼
+	* @return è‹¥è¶³å¤Ÿæ”¯ä»˜åˆ™è¿”å›tureï¼Œåä¹‹false
 	*/
 	bool checkMoney(int price) const;
 
 /**
-	* @brief ½¨Ôì½¨Öşºó¿Û³ı½ğÇ®
-	* @param cost Ä¿±ê½¨ÖşµÄ½¨Ôì´ú¼Û
+	* @brief å»ºé€ å»ºç­‘åæ‰£é™¤é‡‘é’±
+	* @param cost ç›®æ ‡å»ºç­‘çš„å»ºé€ ä»£ä»·
 	*/
 	void spendMoney(int cost);
 
 /**
-	* @brief µÃµ½µ±ÏÂ½ğÇ®Ôö³¤µÄËÙ¶ÈµÄÖµ
-	* @return ½ğ±ÒÔö³¤ËÙÂÊ
+	* @brief å¾—åˆ°å½“ä¸‹é‡‘é’±å¢é•¿çš„é€Ÿåº¦çš„å€¼
+	* @return é‡‘å¸å¢é•¿é€Ÿç‡
 	*/
 	int getIncreasingAmount() const;
 
 /**
-	* @brief ÉèÖÃµ±ÏÂ½ğÇ®Ôö³¤µÄËÙ¶ÈµÄÖµ
-	* @param amount Ôö³¤·ù¶È(¿ó³¡µÄÌØĞÔ)
+	* @brief è®¾ç½®å½“ä¸‹é‡‘é’±å¢é•¿çš„é€Ÿåº¦çš„å€¼
+	* @param amount å¢é•¿å¹…åº¦(çŸ¿åœºçš„ç‰¹æ€§)
 	*/
 	void setIncreasingAmount(int amount);
 	CREATE_FUNC(Money);
 private:
-	int money = 0;				//½ğÇ®×ÜÊı
-	int timer = 0;				//ÓÎÏ·Ëù¾­ÀúµÄÖ¡Êı
-	int update_period = 20;		//Ë¢ĞÂÖÜÆÚ
-	int increase_amount = 0;	//½ğÇ®ËæÖ¡ÊıÔö¼ÓµÄ·ù¶È(Óë¿ó³¡ÊıÄ¿³ÉÕı±È)
+	int money = 0;				//é‡‘é’±æ€»æ•°
+	int timer = 0;				//æ¸¸æˆæ‰€ç»å†çš„å¸§æ•°
+	int update_period = 20;		//åˆ·æ–°å‘¨æœŸ
+	int increase_amount = 0;	//é‡‘é’±éšå¸§æ•°å¢åŠ çš„å¹…åº¦(ä¸çŸ¿åœºæ•°ç›®æˆæ­£æ¯”)
 };
 
 /**
-	* @brief miniÀà¼Ì³Ğ×ÔSpriteÀà
-	* @ÓÃÓÚÏÔÊ¾ÓÎÏ·ÖĞµÄĞ¡µØÍ¼
+	* @brief miniç±»ç»§æ‰¿è‡ªSpriteç±»
+	* @ç”¨äºæ˜¾ç¤ºæ¸¸æˆä¸­çš„å°åœ°å›¾
 */
 class Minimap :public Sprite {
 public:
 /**
-	* @brief ´´½¨Ğ¡µØÍ¼
-	* @param filename Ğ¡µØÍ¼Í¼Æ¬µÄÂ·¾¶
-	* @return Ö¸Ïòµ±Ç°Ğ¡µØÍ¼µÄÖ¸Õë
+	* @brief åˆ›å»ºå°åœ°å›¾
+	* @param filename å°åœ°å›¾å›¾ç‰‡çš„è·¯å¾„
+	* @return æŒ‡å‘å½“å‰å°åœ°å›¾çš„æŒ‡é’ˆ
 	*/
 	static Minimap *create(const std::string &filename);
 
 /**
-	* @brief ±êÖ¾Ğ¡µØÍ¼ÉÏµÄ¸÷·½µ¥Î»
-	* @param index µ¥Î»µÄid
-	* @param target µ¥Î»µÄ×ø±ê
+	* @brief æ ‡å¿—å°åœ°å›¾ä¸Šçš„å„æ–¹å•ä½
+	* @param index å•ä½çš„id
+	* @param target å•ä½çš„åæ ‡
 	*/
 	void addpoint(int index, Point & target);
 
-	DrawNode* drawNode = nullptr;	//Ğ¡µØÍ¼µ¥Î»µÄ±ê×¢
+	DrawNode* drawNode = nullptr;	//å°åœ°å›¾å•ä½çš„æ ‡æ³¨
 private:
-	float mini_width;		//Ğ¡µØÍ¼µÄ¿í¶È
-	float mini_height;		//Ğ¡µØÍ¼µÄ¸ß¶È
+	float mini_width;		//å°åœ°å›¾çš„å®½åº¦
+	float mini_height;		//å°åœ°å›¾çš„é«˜åº¦
 };
 
 /**
-	* @CombatSceneÀà¼Ì³Ğ×ÔLayerÀà
-	* @ÊÇÕû¸öÓÎÏ·µÄÖ÷³¡¾°
-	* @ÓÎÏ·³õÆÚÎÒÃÇ½«Ö÷ÒªµÄ¹¦ÄÜÈ«²¿¼ÓÔØÔÚÕâ¸öÀàÖĞ£¬Í¬Ê±Ò²ÊÇ½øĞĞĞÂ¹¦ÄÜ²âÊÔµÄµØ·½
-	* @Ëæ×Å¿ª·¢µÄ½øĞĞ½«¿ØÖÆÀà¡¢¸ñµãÀà¡¢µ¥Î»ÀàÈ«²¿×ªÒÆÁË³öÈ¥£¬¹¹½¨ÁËÏÖÔÚµÄUnitÀà¡¢GridMapÀà¡¢PathFindingÀà
-	* @Ö»±£ÁôÁËÓÎÏ·µÄ³õÊ¼»¯¡¢¼ÓÔØµØÍ¼¡¢¼ÓÔØÑ¡¿ò¡¢ÒÆ¶¯µØÍ¼µÈ»ù±¾ÓÎÏ·²Ù×÷
+	* @CombatSceneç±»ç»§æ‰¿è‡ªLayerç±»
+	* @æ˜¯æ•´ä¸ªæ¸¸æˆçš„ä¸»åœºæ™¯
+	* @æ¸¸æˆåˆæœŸæˆ‘ä»¬å°†ä¸»è¦çš„åŠŸèƒ½å…¨éƒ¨åŠ è½½åœ¨è¿™ä¸ªç±»ä¸­ï¼ŒåŒæ—¶ä¹Ÿæ˜¯è¿›è¡Œæ–°åŠŸèƒ½æµ‹è¯•çš„åœ°æ–¹
+	* @éšç€å¼€å‘çš„è¿›è¡Œå°†æ§åˆ¶ç±»ã€æ ¼ç‚¹ç±»ã€å•ä½ç±»å…¨éƒ¨è½¬ç§»äº†å‡ºå»ï¼Œæ„å»ºäº†ç°åœ¨çš„Unitç±»ã€GridMapç±»ã€PathFindingç±»
+	* @åªä¿ç•™äº†æ¸¸æˆçš„åˆå§‹åŒ–ã€åŠ è½½åœ°å›¾ã€åŠ è½½é€‰æ¡†ã€ç§»åŠ¨åœ°å›¾ç­‰åŸºæœ¬æ¸¸æˆæ“ä½œ
 */
 class CombatScene :public Layer{
 public:
-	EventListenerTouchOneByOne * destListener = nullptr;			//Êó±ê¼àÌıÆ÷
-	EventListenerKeyboard * letterListener = nullptr;				//¼üÅÌ¼àÌıÆ÷
+	EventListenerTouchOneByOne * destListener = nullptr;			//é¼ æ ‡ç›‘å¬å™¨
+	EventListenerKeyboard * letterListener = nullptr;				//é”®ç›˜ç›‘å¬å™¨
 
-	Point cdelta = { 0,0 };											//µØÍ¼Æ«ÒÆÁ¿
-	GameMessageSet * msgs;											//Ö¸ÏòÏûÏ¢Ä£¿éµÄÖ¸Õë
-	Power * power = nullptr;										//Ö¸ÏòµçÁ¦ĞÅÏ¢µÄÖ¸Õë
-	Money * money = nullptr;										//Ö¸Ïò½ğÇ®ĞÅÏ¢µÄÖ¸Õë
+	Point cdelta = { 0,0 };											//åœ°å›¾åç§»é‡
+	GameMessageSet * msgs;											//æŒ‡å‘æ¶ˆæ¯æ¨¡å—çš„æŒ‡é’ˆ
+	Power * power = nullptr;										//æŒ‡å‘ç”µåŠ›ä¿¡æ¯çš„æŒ‡é’ˆ
+	Money * money = nullptr;										//æŒ‡å‘é‡‘é’±ä¿¡æ¯çš„æŒ‡é’ˆ
 
 /**
-	* @brief ¹¹½¨Ñ¡¿ò
-	* @param p1 Êó±êÊÂ¼şµÄÆğÊ¼µã
-	* @param target Êó±êÊÂ¼şµÄÖÕµã
+	* @brief æ„å»ºé€‰æ¡†
+	* @param p1 é¼ æ ‡äº‹ä»¶çš„èµ·å§‹ç‚¹
+	* @param target é¼ æ ‡äº‹ä»¶çš„ç»ˆç‚¹
 	*/
 	void DrawRectArea(Point p1, Point p2);
 
 /**
-	* @brief Ïòselected_boxÖĞÊÕÈë±»Ñ¡ÖĞµÄ½Úµã
-	* @param p1 Ñ¡¿òµÄ³õÊ¼µã
-	* @param p2 Ñ¡¿òµÄÖÕµã
+	* @brief å‘selected_boxä¸­æ”¶å…¥è¢«é€‰ä¸­çš„èŠ‚ç‚¹
+	* @param p1 é€‰æ¡†çš„åˆå§‹ç‚¹
+	* @param p2 é€‰æ¡†çš„ç»ˆç‚¹
 	*/
 	void getLayerUnit(Point p1, Point p2);
 
 /**
-	* @brief ÍÏ¶¯µØÍ¼ 
-	* @µ±Êó±êÒÆµ½µØÍ¼±ß½ç10~40ÏñËØÊ±ÒÆ¶¯µØÍ¼£¬0~10ÏñËØÊ±ËÙ¶È·­±¶
-	* @µ±°´ÏÂ¼üÅÌÉÏÏÂ×óÓÒ¼üÊ±Ò²ÄÜÒÆ¶¯µØÍ¼ÏÔÊ¾Î»ÖÃ
+	* @brief æ‹–åŠ¨åœ°å›¾ 
+	* @å½“é¼ æ ‡ç§»åˆ°åœ°å›¾è¾¹ç•Œ10~40åƒç´ æ—¶ç§»åŠ¨åœ°å›¾ï¼Œ0~10åƒç´ æ—¶é€Ÿåº¦ç¿»å€
+	* @å½“æŒ‰ä¸‹é”®ç›˜ä¸Šä¸‹å·¦å³é”®æ—¶ä¹Ÿèƒ½ç§»åŠ¨åœ°å›¾æ˜¾ç¤ºä½ç½®
 	*/
 	void dragMap();
 
 /**
-	* @brief Ë¢ĞÂĞ¡µØÍ¼µÄÏÔÊ¾
+	* @brief åˆ·æ–°å°åœ°å›¾çš„æ˜¾ç¤º
 	*/	
 	void updateMircoLocation();
 
 /**
-	* @brief ÓÃÓÚÍÏ¶¯µØÍ¼ºóµÄÊÓµãÎ»ÖÃµÄË¢ĞÂ
+	* @brief ç”¨äºæ‹–åŠ¨åœ°å›¾åçš„è§†ç‚¹ä½ç½®çš„åˆ·æ–°
 	*/
 	virtual void update(float f);
 
 /**
-	* @brief ÓÃÓÚ·µ»Øselected_box
+	* @brief ç”¨äºè¿”å›selected_box
 	*/
 	static Scene* createScene(chat_server * server_context_, chat_client * client_context_);
 	virtual bool init(chat_server * server_context_, chat_client * client_context_);
 	
 /**
-	* @brief ½«ÊÓÒ°ÖĞĞÄÉèÖÃÎª»ùµØ 
+	* @brief å°†è§†é‡ä¸­å¿ƒè®¾ç½®ä¸ºåŸºåœ° 
 	*/
 	void focusOnBase();
 	
 	static CombatScene* create(chat_server * server_context_, chat_client * client_context_);
 	
 private:
-	std::map<cocos2d::EventKeyboard::KeyCode, bool> keys;	//¼ÇÂ¼¼üÅÌÊÂ¼şµÄÀàĞÍ
+	std::map<cocos2d::EventKeyboard::KeyCode, bool> keys;	//è®°å½•é”®ç›˜äº‹ä»¶çš„ç±»å‹
 
-	chat_client * client_side = nullptr;					//·şÎñ¶ËÖ¸Õë
-	chat_server * server_side = nullptr;					//·şÎñ¶ËÖ¸Õë
-	TMXTiledMap* _combat_map = nullptr;						//¼ÓÔØÍßÆ¬µØÍ¼ËùÓÃµÄÖ¸Õë
-	UnitManager * unit_manager;								//ÓÎÏ·¿ØÖÆÆ÷µÄÖ¸Õë
-	GridMap * _grid_map = nullptr;							//¸ñµãµØÍ¼
-	MouseRect* mouse_rect = nullptr;						//Ñ¡¿ò
-	Minimap * mini_map = nullptr;							//Ğ¡µØÍ¼
+	chat_client * client_side = nullptr;					//æœåŠ¡ç«¯æŒ‡é’ˆ
+	chat_server * server_side = nullptr;					//æœåŠ¡ç«¯æŒ‡é’ˆ
+	TMXTiledMap* _combat_map = nullptr;						//åŠ è½½ç“¦ç‰‡åœ°å›¾æ‰€ç”¨çš„æŒ‡é’ˆ
+	UnitManager * unit_manager;								//æ¸¸æˆæ§åˆ¶å™¨çš„æŒ‡é’ˆ
+	GridMap * _grid_map = nullptr;							//æ ¼ç‚¹åœ°å›¾
+	MouseRect* mouse_rect = nullptr;						//é€‰æ¡†
+	Minimap * mini_map = nullptr;							//å°åœ°å›¾
 
-	bool is_clicked = false;								//flag£¬¼ÇÂ¼ÊÇ·ñµã»÷
-	cocos2d::Point last_touch{ 0, 0 };						//Êó±ê×îºóÒ»´ÎÅöµ½µÄµã
-	Point _cursor_position{ 0,0 };							//Êó±êÎ»ÖÃ
-	int message_update = 0;									//ÏûÏ¢µÄ¸üĞÂ
+	bool is_clicked = false;								//flagï¼Œè®°å½•æ˜¯å¦ç‚¹å‡»
+	cocos2d::Point last_touch{ 0, 0 };						//é¼ æ ‡æœ€åä¸€æ¬¡ç¢°åˆ°çš„ç‚¹
+	Point _cursor_position{ 0,0 };							//é¼ æ ‡ä½ç½®
+	int message_update = 0;									//æ¶ˆæ¯çš„æ›´æ–°
 };
 
 inline float Tri_Dsitance(Point t1, Point t2) {

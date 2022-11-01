@@ -5,23 +5,23 @@
 #include "cocos2d.h"
 #include <vector>
 
-typedef std::vector<std::vector<int>> dyadic_array;		//vectorĞÎÊ½µÄ¶şÎ¬Êı×é
+typedef std::vector<std::vector<int>> dyadic_array;		//vectorå½¢å¼çš„äºŒç»´æ•°ç»„
 
 struct GridSize;
 
 /**
-	* @brief GridPointÊÇÒ»¸ö¼ÇÂ¼Ã¿¸öµØÍ¼¸ñµãµÄ½á¹¹Ìå
-	* @µØÍ¼ÖĞÃ¿¸ö¸ñµãÕ¼ÓÃµÄÏñËØ´óĞ¡Îª 32 * 32 ÏñËØ
-	* @ÎÒÃÇ½«Õû¸öµØÍ¼»®·ÖÎª 128 * 128 ¸ö¸ñµã
-	* @ÒÔ´ËÎª»ù´¡À´±ÜÃâµ¥Î»½¨ÖşµÄÅö×²¡¢ÖØµş£¬Í¬Ê±ÅäºÏA*Ñ°Â·Ëã·¨
+	* @brief GridPointæ˜¯ä¸€ä¸ªè®°å½•æ¯ä¸ªåœ°å›¾æ ¼ç‚¹çš„ç»“æ„ä½“
+	* @åœ°å›¾ä¸­æ¯ä¸ªæ ¼ç‚¹å ç”¨çš„åƒç´ å¤§å°ä¸º 32 * 32 åƒç´ 
+	* @æˆ‘ä»¬å°†æ•´ä¸ªåœ°å›¾åˆ’åˆ†ä¸º 128 * 128 ä¸ªæ ¼ç‚¹
+	* @ä»¥æ­¤ä¸ºåŸºç¡€æ¥é¿å…å•ä½å»ºç­‘çš„ç¢°æ’ã€é‡å ï¼ŒåŒæ—¶é…åˆA*å¯»è·¯ç®—æ³•
 */
 struct GridPoint {
 	int _x, _y;
 	GridPoint(int x = 0, int y = 0) :_x(x), _y(y) { }
 
 /**
-	* @brief ÔËËã·ûµÄÖØÔØ£¬ÅĞ¶Ï¸ñµãÊÇ·ñÖØµş
-	* @ ½ÓÏÂÀ´µÄ¼¸¸öÓÑÔªº¯ÊıÖ´ĞĞ¸ñµãµÄ¼Ó¼õ²Ù×÷£¬´Ë´¦²»×ö×¸Êö
+	* @brief è¿ç®—ç¬¦çš„é‡è½½ï¼Œåˆ¤æ–­æ ¼ç‚¹æ˜¯å¦é‡å 
+	* @ æ¥ä¸‹æ¥çš„å‡ ä¸ªå‹å…ƒå‡½æ•°æ‰§è¡Œæ ¼ç‚¹çš„åŠ å‡æ“ä½œï¼Œæ­¤å¤„ä¸åšèµ˜è¿°
 	*/
 	bool operator==(const GridPoint& gp2) const;
 	friend GridPoint operator+(const GridPoint& gp1, const GridPoint& gp2);
@@ -29,8 +29,8 @@ struct GridPoint {
 	friend GridPoint operator-(const GridPoint& gp, const GridSize& gz);
 
 /**
-	* @brief ½«ËùµÃµÄÏòÁ¿¸ù¾İ sgn º¯Êı´¦ÀíÎª ({-1, 0, 1}, {-1, 0, 1})
-	* @return ·µ»Ø´¦ÀíºóµÄÏòÁ¿
+	* @brief å°†æ‰€å¾—çš„å‘é‡æ ¹æ® sgn å‡½æ•°å¤„ç†ä¸º ({-1, 0, 1}, {-1, 0, 1})
+	* @return è¿”å›å¤„ç†åçš„å‘é‡
 	*/
 	GridPoint getDirectionVec();
 };
@@ -48,174 +48,174 @@ struct GridSize
 };
 
 /**
-	* @brief ¸Ã½á¹¹Ìå¼ÇÂ¼Ñ¡ÔñµÄ¸ñµãÇøÓò(·¶Î§)
-*/
+ * @brief è¯¥ç»“æ„ä½“è®°å½•é€‰æ‹©çš„æ ¼ç‚¹åŒºåŸŸ(èŒƒå›´)
+ */
 struct GridRect
 {
-	GridPoint center;			//¸ñµãÇøÓòÖĞĞÄ×ø±ê
-	GridPoint lower_left;		//¸ñµãÇøÓòµÄ×óÏÂ½Ç×ø±ê
-	GridSize size;				//¸ñµãÇøÓòµÄ³ß´ç
+	GridPoint center;			//æ ¼ç‚¹åŒºåŸŸä¸­å¿ƒåæ ‡
+	GridPoint lower_left;		//æ ¼ç‚¹åŒºåŸŸçš„å·¦ä¸‹è§’åæ ‡
+	GridSize size;				//æ ¼ç‚¹åŒºåŸŸçš„å°ºå¯¸
 
 	GridRect(GridPoint _center, GridSize _size);
 };
 
 /**
-	* @brief GridMapÏàµ±ÓÚÒ»¸ö½«TMXµØÍ¼µÄĞÅÏ¢Í¶Ó°µ½Ò»¸öÍ¸Ã÷µÄµØÍ¼²ãµÄÀà
-	* @ÓÃÓÚ½«µØÍ¼ËùÓĞÒª´¦ÀíµÄĞÅÏ¢½øĞĞ»ã×Ü¡¢´¦Àí
-*/
+ * @brief GridMapç›¸å½“äºä¸€ä¸ªå°†TMXåœ°å›¾çš„ä¿¡æ¯æŠ•å½±åˆ°ä¸€ä¸ªé€æ˜çš„åœ°å›¾å±‚çš„ç±»
+ * @ç”¨äºå°†åœ°å›¾æ‰€æœ‰è¦å¤„ç†çš„ä¿¡æ¯è¿›è¡Œæ±‡æ€»ã€å¤„ç†
+ */
 class GridMap:public cocos2d::Ref{
 public:
 /**
-	* @brief ½«TMXTiledMapÖĞµÄÍ¼²ãĞÅÏ¢¼ÓÔØµ½¸ñµãµØÍ¼ÉÏ
-	* @return Ö¸ÏòGridMapµÄÖ¸Õë
+	* @brief å°†TMXTiledMapä¸­çš„å›¾å±‚ä¿¡æ¯åŠ è½½åˆ°æ ¼ç‚¹åœ°å›¾ä¸Š
+	* @return æŒ‡å‘GridMapçš„æŒ‡é’ˆ
 	*/
 	static GridMap* create(const cocos2d::TMXTiledMap * tiled_map);
 
 /**
-	* @brief ÓÃTMXTiledMap¶Ô¸ñµãµØÍ¼Ö´ĞĞ³õÊ¼»¯²Ù×÷
-	* @½«µØÍ¼ÉÏµÄ¿ÉÓÃµãÔÚ_gmapÉÏ±ê×¢Îª0£¬±»Õ¼¾İµã±ê×¢Îª1
-	* @return Èô³õÊ¼»¯³É¹¦Ôò·µ»Øtrue,·´Ö®false
+	* @brief ç”¨TMXTiledMapå¯¹æ ¼ç‚¹åœ°å›¾æ‰§è¡Œåˆå§‹åŒ–æ“ä½œ
+	* @å°†åœ°å›¾ä¸Šçš„å¯ç”¨ç‚¹åœ¨_gmapä¸Šæ ‡æ³¨ä¸º0ï¼Œè¢«å æ®ç‚¹æ ‡æ³¨ä¸º1
+	* @return è‹¥åˆå§‹åŒ–æˆåŠŸåˆ™è¿”å›true,åä¹‹false
 	*/
 	bool initWithTiledMap(const cocos2d::TMXTiledMap * tiled_map);
 
 /**
-	* @brief ½«GridPointµÄ×ø±ê×ª»»³ÉPoint×ø±ê
-	* @param grid_point Òª×ª»»µÄGridPoint×ø±ê
-	* @return ÏàÓ¦µÄPoint×ø±ê
+	* @brief å°†GridPointçš„åæ ‡è½¬æ¢æˆPointåæ ‡
+	* @param grid_point è¦è½¬æ¢çš„GridPointåæ ‡
+	* @return ç›¸åº”çš„Pointåæ ‡
 	*/
 	cocos2d::Point getPoint(const GridPoint& grid_point);
 
 /**
-	* @brief ½«PointµÄ×ø±ê×ª»»³ÉGridPoint×ø±ê
-	* @param point Òª×ª»»µÄPoint×ø±ê
-	* @return ÏàÓ¦µÄGridPoint×ø±ê
+	* @brief å°†Pointçš„åæ ‡è½¬æ¢æˆGridPointåæ ‡
+	* @param point è¦è½¬æ¢çš„Pointåæ ‡
+	* @return ç›¸åº”çš„GridPointåæ ‡
 	*/
 	GridPoint getGridPoint(const cocos2d::Point& point);
 
 /**
-	* @brief ½«´øÓĞ×ø±êÆ«ÒÆÁ¿OffsetµÄPointµÄ×ø±ê×ª»»³ÉGridPoint×ø±ê
-	* @param point Òª×ª»»µÄ´øÆ«ÒÆÁ¿µÄPoint×ø±ê
-	* @return ÏàÓ¦µÄGridPoint×ø±ê
+	* @brief å°†å¸¦æœ‰åæ ‡åç§»é‡Offsetçš„Pointçš„åæ ‡è½¬æ¢æˆGridPointåæ ‡
+	* @param point è¦è½¬æ¢çš„å¸¦åç§»é‡çš„Pointåæ ‡
+	* @return ç›¸åº”çš„GridPointåæ ‡
 	*/
 	GridPoint getGridPointWithOffset(const cocos2d::Point& p);
 
 /**
-	* @brief ½«GridPointµÄ×ø±ê×ª»»³É·´Ó¦×ø±êÆ«ÒÆÁ¿Point×ø±ê
-	* @param point Òª×ª»»µÄGridPoint×ø±ê
-	* @return ÏàÓ¦µÄ´øÆ«ÒÆÁ¿µÄPoint×ø±ê
+	* @brief å°†GridPointçš„åæ ‡è½¬æ¢æˆååº”åæ ‡åç§»é‡Pointåæ ‡
+	* @param point è¦è½¬æ¢çš„GridPointåæ ‡
+	* @return ç›¸åº”çš„å¸¦åç§»é‡çš„Pointåæ ‡
 	*/
 	cocos2d::Point getPointWithOffset(const GridPoint& gp);
 
 /**
-	* @brief ÅĞ¶Ïµ¥Î»ÊÇ·ñµ½´ïÁËÄ¿±ê¸ñµã
-	* @param cur_fp µ¥Î»Ä¿Ç°ËùÕ¼¾İµÄPoint×ø±ê
-	* @param dest_gp µ¥Î»µ±Ç°ËùÒªÇ°ÍùµÄÄ¿±ê¸ñµãµÄGridPoint×ø±ê
-	* @return Èç¹ûµÖ´ïÔò·µ»Øtrue,·´Ö®false
+	* @brief åˆ¤æ–­å•ä½æ˜¯å¦åˆ°è¾¾äº†ç›®æ ‡æ ¼ç‚¹
+	* @param cur_fp å•ä½ç›®å‰æ‰€å æ®çš„Pointåæ ‡
+	* @param dest_gp å•ä½å½“å‰æ‰€è¦å‰å¾€çš„ç›®æ ‡æ ¼ç‚¹çš„GridPointåæ ‡
+	* @return å¦‚æœæŠµè¾¾åˆ™è¿”å›true,åä¹‹false
 	*/
 	bool hasApproached(const cocos2d::Point& cur_fp, const GridPoint& dest_gp);
 
 /**
-	* @brief µ¥Î»µ½´ïÄ³¸ñµãºóµ÷ÓÃ¸Ãº¯ÊıÕ¼¾İ¸Ã¸ñµã£¬¼´¸Ä±ä_gmapÓë_umapµÄÖµ
-	* @param id ±ê×¢µ¥Î»µÄid
-	* @param pos µ¥Î»ÏëÒªÕ¼ÓÃµÄ¸ñµãÎ»ÖÃ
-	* @param occupy_grid µ¥Î»ÊÇ·ñÔÚĞĞ½øÖĞÕ¼ÓÃ¸Ã¸ñµã(³ıÁË·É»úÒÔÍâµÄËùÓĞµ¥Î»¾ùÕ¼¾İ¸ñµã£¬¼´²»ÄÜÖØµş)
-	* @return Èç¹ûÕ¼ÓÃ³É¹¦(ËµÃ÷¸ñµãµ±Ç°¿ÉÓÃ)Ôò·µ»Øtrue£¬·´Ö®·µ»Øfalse
+	* @brief å•ä½åˆ°è¾¾æŸæ ¼ç‚¹åè°ƒç”¨è¯¥å‡½æ•°å æ®è¯¥æ ¼ç‚¹ï¼Œå³æ”¹å˜_gmapä¸_umapçš„å€¼
+	* @param id æ ‡æ³¨å•ä½çš„id
+	* @param pos å•ä½æƒ³è¦å ç”¨çš„æ ¼ç‚¹ä½ç½®
+	* @param occupy_grid å•ä½æ˜¯å¦åœ¨è¡Œè¿›ä¸­å ç”¨è¯¥æ ¼ç‚¹(é™¤äº†é£æœºä»¥å¤–çš„æ‰€æœ‰å•ä½å‡å æ®æ ¼ç‚¹ï¼Œå³ä¸èƒ½é‡å )
+	* @return å¦‚æœå ç”¨æˆåŠŸ(è¯´æ˜æ ¼ç‚¹å½“å‰å¯ç”¨)åˆ™è¿”å›trueï¼Œåä¹‹è¿”å›false
 	*/
 	bool occupyPosition(int id, const GridPoint& pos, bool occupy_grid = true);
 
 /**
-	* @brief µ¥Î»µ½´ïÄ³¸ñµãÇøÓòºóµ÷ÓÃ¸Ãº¯ÊıÕ¼¾İ¸Ã¸ñµãÇøÓò£¬¼´¸Ä±ä_gmapÓë_umapµÄÖµ
-	* @param id ±ê×¢µ¥Î»µÄid
-	* @param grec µ¥Î»ÏëÒªÕ¼ÓÃµÄ¸ñµãÎ»ÖÃ
-	* @param occupy_grid µ¥Î»ÊÇ·ñÔÚĞĞ½øÖĞÕ¼ÓÃ¸Ã¸ñµã(³ıÁË·É»úÒÔÍâµÄËùÓĞµ¥Î»¾ùÕ¼¾İ¸ñµã£¬¼´²»ÄÜÖØµş)
-	* @return Èç¹ûÕ¼ÓÃ³É¹¦(ËµÃ÷¸ñµãµ±Ç°¿ÉÓÃ)Ôò·µ»Øtrue£¬·´Ö®·µ»Øfalse
+	* @brief å•ä½åˆ°è¾¾æŸæ ¼ç‚¹åŒºåŸŸåè°ƒç”¨è¯¥å‡½æ•°å æ®è¯¥æ ¼ç‚¹åŒºåŸŸï¼Œå³æ”¹å˜_gmapä¸_umapçš„å€¼
+	* @param id æ ‡æ³¨å•ä½çš„id
+	* @param grec å•ä½æƒ³è¦å ç”¨çš„æ ¼ç‚¹ä½ç½®
+	* @param occupy_grid å•ä½æ˜¯å¦åœ¨è¡Œè¿›ä¸­å ç”¨è¯¥æ ¼ç‚¹(é™¤äº†é£æœºä»¥å¤–çš„æ‰€æœ‰å•ä½å‡å æ®æ ¼ç‚¹ï¼Œå³ä¸èƒ½é‡å )
+	* @return å¦‚æœå ç”¨æˆåŠŸ(è¯´æ˜æ ¼ç‚¹å½“å‰å¯ç”¨)åˆ™è¿”å›trueï¼Œåä¹‹è¿”å›false
 	*/
 	void occupyPosition(int id, const GridRect& grec, bool occupy_grid = true);
 
 /**
-	* @brief µ¥Î»µ½´ïÄ³¸ñµãºóµ÷ÓÃ¸Ãº¯ÊıÕ¼¾İ¸Ã¸ñµã£¬¼´¸Ä±ä_gmapÓë_umapµÄÖµ
-	* @param id ±ê×¢µ¥Î»µÄid
-	* @param pos µ¥Î»ÏëÒªÕ¼ÓÃµÄ¸ñµãÎ»ÖÃ
-	* @param occupy_grid µ¥Î»ÊÇ·ñÔÚĞĞ½øÖĞÕ¼ÓÃ¸Ã¸ñµã(³ıÁË·É»úÒÔÍâµÄËùÓĞµ¥Î»¾ùÕ¼¾İ¸ñµã£¬¼´²»ÄÜÖØµş)
-	* @return Èç¹ûÕ¼ÓÃ³É¹¦(ËµÃ÷¸ñµãµ±Ç°¿ÉÓÃ)Ôò·µ»Øtrue£¬·´Ö®·µ»Øfalse
+	* @brief å•ä½åˆ°è¾¾æŸæ ¼ç‚¹åè°ƒç”¨è¯¥å‡½æ•°å æ®è¯¥æ ¼ç‚¹ï¼Œå³æ”¹å˜_gmapä¸_umapçš„å€¼
+	* @param id æ ‡æ³¨å•ä½çš„id
+	* @param pos å•ä½æƒ³è¦å ç”¨çš„æ ¼ç‚¹ä½ç½®
+	* @param occupy_grid å•ä½æ˜¯å¦åœ¨è¡Œè¿›ä¸­å ç”¨è¯¥æ ¼ç‚¹(é™¤äº†é£æœºä»¥å¤–çš„æ‰€æœ‰å•ä½å‡å æ®æ ¼ç‚¹ï¼Œå³ä¸èƒ½é‡å )
+	* @return å¦‚æœå ç”¨æˆåŠŸ(è¯´æ˜æ ¼ç‚¹å½“å‰å¯ç”¨)åˆ™è¿”å›trueï¼Œåä¹‹è¿”å›false
 	*/
 	bool occupyPosition(int id, const cocos2d::Point& pos, bool occupy_grid = true);
 
 /**
-	* @brief ÅĞ¶Ï¸ñµãÊÇ·ñÔÚµØÍ¼ÇøÓòÄÚ
-	* @param gp ´ı¼ì²é¸ñµãµÄÎ»ÖÃĞÅÏ¢
-	* @return Èç¹ûµ±Ç°¸ñµãÔÚµØÍ¼·¶Î§ÄÚ·µ»Øtrue£¬·´Ö®·µ»Øfalse
+	* @brief åˆ¤æ–­æ ¼ç‚¹æ˜¯å¦åœ¨åœ°å›¾åŒºåŸŸå†…
+	* @param gp å¾…æ£€æŸ¥æ ¼ç‚¹çš„ä½ç½®ä¿¡æ¯
+	* @return å¦‚æœå½“å‰æ ¼ç‚¹åœ¨åœ°å›¾èŒƒå›´å†…è¿”å›trueï¼Œåä¹‹è¿”å›false
 	*/
 	bool checkPointInMap(const GridPoint& gp) const;
 
 /**
-	* @brief ÅĞ¶Ï¸ñµãÊÇ·ñÔÚµØÍ¼ÇøÓòÄÚ
-	* @param x ´ı¼ì²é¸ñµãµÄË®Æ½Î»ÖÃ×ø±ê
-	* @param y ´ı¼ì²é¸ñµãµÄÊúÖ±Î»ÖÃ×ø±ê
-	* @return Èç¹ûµ±Ç°¸ñµãÔÚµØÍ¼·¶Î§ÄÚ·µ»Øtrue£¬·´Ö®·µ»Øfalse
+	* @brief åˆ¤æ–­æ ¼ç‚¹æ˜¯å¦åœ¨åœ°å›¾åŒºåŸŸå†…
+	* @param x å¾…æ£€æŸ¥æ ¼ç‚¹çš„æ°´å¹³ä½ç½®åæ ‡
+	* @param y å¾…æ£€æŸ¥æ ¼ç‚¹çš„ç«–ç›´ä½ç½®åæ ‡
+	* @return å¦‚æœå½“å‰æ ¼ç‚¹åœ¨åœ°å›¾èŒƒå›´å†…è¿”å›trueï¼Œåä¹‹è¿”å›false
 	*/
 	bool checkPointInMap(int x, int y) const;
 
 /**
-	* @brief ÔÚµ÷ÓÃoccupyPositionµÄÊ±ºò¼ì²é¸Ã¸ñµãÊÇ·ñ¿ÉÓÃ
-	* @param gp ´ı¼ì²é¸ñµãµÄÎ»ÖÃĞÅÏ¢
-	* @return Èç¹û¸ñµãµ±Ç°¿ÉÓÃ·µ»Øtrue£¬·´Ö®·µ»Øfalse
+	* @brief åœ¨è°ƒç”¨occupyPositionçš„æ—¶å€™æ£€æŸ¥è¯¥æ ¼ç‚¹æ˜¯å¦å¯ç”¨
+	* @param gp å¾…æ£€æŸ¥æ ¼ç‚¹çš„ä½ç½®ä¿¡æ¯
+	* @return å¦‚æœæ ¼ç‚¹å½“å‰å¯ç”¨è¿”å›trueï¼Œåä¹‹è¿”å›false
 	*/
 	bool checkPosition(const GridPoint & gp);
 
 /**
-	* @brief ÔÚµ÷ÓÃoccupyPositionµÄÊ±ºò¼ì²é¸Ã¸ñµãÇøÓòÊÇ·ñ¿ÉÓÃ
-	* @param gp ´ı¼ì²é¸ñµãÇøÓòµÄÎ»ÖÃĞÅÏ¢
-	* @return Èç¹û¸ñµãÇøÓòµ±Ç°¿ÉÓÃ·µ»Øtrue£¬·´Ö®·µ»Øfalse
+	* @brief åœ¨è°ƒç”¨occupyPositionçš„æ—¶å€™æ£€æŸ¥è¯¥æ ¼ç‚¹åŒºåŸŸæ˜¯å¦å¯ç”¨
+	* @param gp å¾…æ£€æŸ¥æ ¼ç‚¹åŒºåŸŸçš„ä½ç½®ä¿¡æ¯
+	* @return å¦‚æœæ ¼ç‚¹åŒºåŸŸå½“å‰å¯ç”¨è¿”å›trueï¼Œåä¹‹è¿”å›false
 	*/
 	bool checkPosition(const GridRect & grec);
 
 /**
-	* @brief µ¥Î»Àë¿ªÄ³¸ñµãºóµ÷ÓÃ¸Ãº¯ÊıÀë¿ª¸Ã¸ñµã£¬¸Ä±ä_gmapÓë_umapµÄÖµ
-	* @param pos µ¥Î»ÏëÒªÀë¿ªµÄ¸ñµãÎ»ÖÃ
-	* @param occupy_grid µ¥Î»ÊÇ·ñÔÚĞĞ½øÖĞÕ¼ÓÃ¸Ã¸ñµã
+	* @brief å•ä½ç¦»å¼€æŸæ ¼ç‚¹åè°ƒç”¨è¯¥å‡½æ•°ç¦»å¼€è¯¥æ ¼ç‚¹ï¼Œæ”¹å˜_gmapä¸_umapçš„å€¼
+	* @param pos å•ä½æƒ³è¦ç¦»å¼€çš„æ ¼ç‚¹ä½ç½®
+	* @param occupy_grid å•ä½æ˜¯å¦åœ¨è¡Œè¿›ä¸­å ç”¨è¯¥æ ¼ç‚¹
 	*/
 	void leavePosition(const GridPoint & pos, bool occupy_grid = true);
 
 /**
-	* @brief µ¥Î»Àë¿ªÄ³¸ñµãÇøÓòºóµ÷ÓÃ¸Ãº¯ÊıÀë¿ª¸Ã¸ñµãÇøÓò£¬¸Ä±ä_gmapÓë_umapµÄÖµ
-	* @param grec µ¥Î»ÏëÒªÀë¿ªµÄ¸ñµãÇøÓò
-	* @param occupy_grid µ¥Î»ÊÇ·ñÔÚĞĞ½øÖĞÕ¼ÓÃ¸Ã¸ñµã
+	* @brief å•ä½ç¦»å¼€æŸæ ¼ç‚¹åŒºåŸŸåè°ƒç”¨è¯¥å‡½æ•°ç¦»å¼€è¯¥æ ¼ç‚¹åŒºåŸŸï¼Œæ”¹å˜_gmapä¸_umapçš„å€¼
+	* @param grec å•ä½æƒ³è¦ç¦»å¼€çš„æ ¼ç‚¹åŒºåŸŸ
+	* @param occupy_grid å•ä½æ˜¯å¦åœ¨è¡Œè¿›ä¸­å ç”¨è¯¥æ ¼ç‚¹
 	*/
 	void leavePosition(const GridRect & grec, bool occupy_grid = true);
 
 /**
-	* @brief Ñ°ÕÒÔÚÄ¿±ê¸ñµã¸½½üµÄ¿ÉÓÃ¸ñµã(µ±µ¥Î»ĞĞ½øÖÕµã±»Õ¼¾İÊ±µ÷ÓÃ´Ëº¯Êı)
-	* @param origin_gp Ä¿±ê¸ñµã
-	* @return ·ûºÏÌõ¼şµÄ¿ÉÓÃ¸ñµã
+	* @brief å¯»æ‰¾åœ¨ç›®æ ‡æ ¼ç‚¹é™„è¿‘çš„å¯ç”¨æ ¼ç‚¹(å½“å•ä½è¡Œè¿›ç»ˆç‚¹è¢«å æ®æ—¶è°ƒç”¨æ­¤å‡½æ•°)
+	* @param origin_gp ç›®æ ‡æ ¼ç‚¹
+	* @return ç¬¦åˆæ¡ä»¶çš„å¯ç”¨æ ¼ç‚¹
 	*/
 	GridPoint findFreePositionNear(const GridPoint& origin_gp);
 
 /**
-	* @brief »ñÈ¡_gmap£¬¼´¿ÉÓÃ¸ñµãºÍ±»Õ¼¾İ¸ñµãµÄÎ»ÖÃĞÅÏ¢
+	* @brief è·å–_gmapï¼Œå³å¯ç”¨æ ¼ç‚¹å’Œè¢«å æ®æ ¼ç‚¹çš„ä½ç½®ä¿¡æ¯
 	* @return _gmap
 	*/
 	const dyadic_array& getLogicalGridMap();
 
 /**
-	* @brief »ñÈ¡_umap£¬¼´Õ¼¾İµØÍ¼Ã¿¸ö¸ñµãµÄµ¥Î»idĞÅÏ¢
+	* @brief è·å–_umapï¼Œå³å æ®åœ°å›¾æ¯ä¸ªæ ¼ç‚¹çš„å•ä½idä¿¡æ¯
 	* @return _umap
 	*/
 	const dyadic_array& getUnitMap();
 
 /**
-	* @brief »ñÈ¡_umapÔÚÄ³¸ö¸ñµã·¶Î§ÄÚµÄÊıÖµ£¬¼´ÔÚ¸Ã¸ñµã·¶Î§ÄÚÃ¿¸ö¸ñµãµÄµ¥Î»idĞÅÏ¢
-	* @return ´æ´¢idĞÅÏ¢µÄvector
+	* @brief è·å–_umapåœ¨æŸä¸ªæ ¼ç‚¹èŒƒå›´å†…çš„æ•°å€¼ï¼Œå³åœ¨è¯¥æ ¼ç‚¹èŒƒå›´å†…æ¯ä¸ªæ ¼ç‚¹çš„å•ä½idä¿¡æ¯
+	* @return å­˜å‚¨idä¿¡æ¯çš„vector
 	*/
 	std::vector<int> getUnitIDAt(const GridRect& range) const;
 
 private:
-	dyadic_array _gmap;					//´æ´¢¸ñµãÊÇ·ñ¿ÉÒÔÕ¼ÓÃĞÅÏ¢µÄ¶şÎ¬Êı×é
-	dyadic_array _umap;					//´æ´¢Õ¼ÓÃ¸ñµãµÄµ¥Î»IDĞÅÏ¢µÄ¶şÎ¬Êı×é
-	int _map_width, _map_height;		//¸ñµãµØÍ¼µÄ¿í¶ÈºÍ¸ß¶È
-	int _tile_width, _tile_height;		//Ã¿¿é¸ñµãµÄ¿í¶ÈºÍ¸ß¶È
+	dyadic_array _gmap;					//å­˜å‚¨æ ¼ç‚¹æ˜¯å¦å¯ä»¥å ç”¨ä¿¡æ¯çš„äºŒç»´æ•°ç»„
+	dyadic_array _umap;					//å­˜å‚¨å ç”¨æ ¼ç‚¹çš„å•ä½IDä¿¡æ¯çš„äºŒç»´æ•°ç»„
+	int _map_width, _map_height;		//æ ¼ç‚¹åœ°å›¾çš„å®½åº¦å’Œé«˜åº¦
+	int _tile_width, _tile_height;		//æ¯å—æ ¼ç‚¹çš„å®½åº¦å’Œé«˜åº¦
 
-	cocos2d::Vec2 _offset_vec;			//Æ«ÒÆÏòÁ¿£¬Æä´óĞ¡Îª(_tile_width / 2, _tile_height / 2)
+	cocos2d::Vec2 _offset_vec;			//åç§»å‘é‡ï¼Œå…¶å¤§å°ä¸º(_tile_width / 2, _tile_height / 2)
 };
 
 #endif

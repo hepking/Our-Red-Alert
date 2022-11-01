@@ -33,15 +33,15 @@ bool BaseLayer::init()
 {
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	auto bc = Sprite::create("Picture/background/bc.png");
-	//³õÊ¼»¯layout
+	//åˆå§‹åŒ–layout
 	layout = Layout::create();
 	layout->setLayoutType(LayoutType::RELATIVE);
 	layout->setContentSize(Size(bc->getContentSize().width, bc->getContentSize().height*0.8));
 	layout->setAnchorPoint(Vec2::ANCHOR_MIDDLE_RIGHT);
 	layout->setBackGroundImage("Picture/background/bc.png");
 	this->addChild(layout);
-	//Ìí¼Ó´´½¨½¨ÖþµÄ°´Å¥
-	// ´´½¨Ò»¸ö´´½¨militaryCampµÄButton¶ÔÏó£¬ÉèÖÃÔÚLayoutµÄ×óÉÏ½Ç
+	//æ·»åŠ åˆ›å»ºå»ºç­‘çš„æŒ‰é’®
+	// åˆ›å»ºä¸€ä¸ªåˆ›å»ºmilitaryCampçš„Buttonå¯¹è±¡ï¼Œè®¾ç½®åœ¨Layoutçš„å·¦ä¸Šè§’
 	militaryCamp = Button::create("/Picture/menu/MilitaryCampMenu.png",
 		"/Picture/menu/MilitaryCampMenu.png");
 	militaryCamp->setScale(0.8);
@@ -49,22 +49,22 @@ bool BaseLayer::init()
 	RelativeLayoutParameter* rp_LeftCenter = RelativeLayoutParameter::create();
 	rp_LeftCenter->setAlign(RelativeLayoutParameter::RelativeAlign::PARENT_TOP_LEFT);
 	militaryCamp->setLayoutParameter(rp_LeftCenter);
-	//¸ømilitaryCampÌí¼Ó¼àÌýÆ÷
+	//ç»™militaryCampæ·»åŠ ç›‘å¬å™¨
 	militaryCamp->addTouchEventListener([=](Ref * pSender, Widget::TouchEventType type)
 	{
 		if (type == Widget::TouchEventType::BEGAN)
 		{
 			if (checkBuilding(MILITARY_CAMP_MONEY, BUILDING_CONSUME_POWER))
 			{
-				//½ûÓÃ²ã¼àÌýÆ÷
+				//ç¦ç”¨å±‚ç›‘å¬å™¨
 				unit_manager->getCombatScene()->destListener->setEnabled(false);
-				//Òþ²Ø²Ëµ¥
+				//éšè—èœå•
 				this->setVisible(false);
 				onBuilding(11, MilitaryCamp::size);
 			}
 		}
 	});
-	//Ìí¼ÓÒ»¸ö´´½¨mineµÄButton¶ÔÏó£¬ÉèÖÃÔÚlayoutµÄÓÒÉÏ½Ç
+	//æ·»åŠ ä¸€ä¸ªåˆ›å»ºmineçš„Buttonå¯¹è±¡ï¼Œè®¾ç½®åœ¨layoutçš„å³ä¸Šè§’
 	mine = Button::create("/Picture/menu/MineMenu.png",
 		"/Picture/menu/MineMenu.png");
 	mine->setScale(0.8);
@@ -72,23 +72,23 @@ bool BaseLayer::init()
 	RelativeLayoutParameter* rp_top_right = RelativeLayoutParameter::create();
 	rp_top_right->setAlign(RelativeLayoutParameter::RelativeAlign::PARENT_TOP_RIGHT);
 	mine->setLayoutParameter(rp_top_right);
-	//¸ømineÌí¼Ó¼àÌýÆ÷
+	//ç»™mineæ·»åŠ ç›‘å¬å™¨
 	mine->addTouchEventListener([=](Ref * pSender, Widget::TouchEventType type)
 	{
 		if (type == Widget::TouchEventType::BEGAN)
 		{
 			if (checkBuilding(MINE_MONEY, BUILDING_CONSUME_POWER))
 			{
-				//½ûÓÃ²ã¼àÌýÆ÷
+				//ç¦ç”¨å±‚ç›‘å¬å™¨
 				unit_manager->getCombatScene()->destListener->setEnabled(false);
-				//Òþ²Ø²Ëµ¥
+				//éšè—èœå•
 				this->setVisible(false);
 				onBuilding(12, Mine::size);
 			}
 		}
 	});
 
-	//Ìí¼ÓÒ»¸ö´´½¨powerPlantµÄButton¶ÔÏó£¬ÉèÖÃÔÚlayoutµÄ×óÖÐ²¿
+	//æ·»åŠ ä¸€ä¸ªåˆ›å»ºpowerPlantçš„Buttonå¯¹è±¡ï¼Œè®¾ç½®åœ¨layoutçš„å·¦ä¸­éƒ¨
 	powerPlant = Button::create("/Picture/menu/PowerPlantMenu.png",
 		"/Picture/menu/PowerPlantMenu.png");
 	powerPlant->setScale(0.8);
@@ -96,23 +96,23 @@ bool BaseLayer::init()
 	RelativeLayoutParameter* rp_left_center = RelativeLayoutParameter::create();
 	rp_left_center->setAlign(RelativeLayoutParameter::RelativeAlign::PARENT_LEFT_CENTER_VERTICAL);
 	powerPlant->setLayoutParameter(rp_left_center);
-	//¸øpowerPlantÌí¼Ó¼àÌýÆ÷
+	//ç»™powerPlantæ·»åŠ ç›‘å¬å™¨
 	powerPlant->addTouchEventListener([=](Ref * pSender, Widget::TouchEventType type)
 	{
 		if (type == Widget::TouchEventType::BEGAN)
 		{
 			if (checkBuilding(POWER_PLANT_MONEY, 0))
 			{
-				//½ûÓÃ²ã¼àÌýÆ÷
+				//ç¦ç”¨å±‚ç›‘å¬å™¨
 				unit_manager->getCombatScene()->destListener->setEnabled(false);
-				//Òþ²Ø²Ëµ¥
+				//éšè—èœå•
 				this->setVisible(false);
 				onBuilding(13, PowerPlant::size);
 			}
 		}
 	});
 
-	//Ìí¼ÓÒ»¸ö´´½¨TankFactaryµÄButton¶ÔÏó£¬ÉèÖÃÔÚlayoutµÄÓÒ²¿
+	//æ·»åŠ ä¸€ä¸ªåˆ›å»ºTankFactaryçš„Buttonå¯¹è±¡ï¼Œè®¾ç½®åœ¨layoutçš„å³éƒ¨
 	tankFactary = Button::create("/Picture/menu/TankFactaryMenu.png",
 		"/Picture/menu/TankFactaryMenu.png");
 	tankFactary->setScale(0.8);
@@ -120,30 +120,30 @@ bool BaseLayer::init()
 	RelativeLayoutParameter* rp_right_center = RelativeLayoutParameter::create();
 	rp_right_center->setAlign(RelativeLayoutParameter::RelativeAlign::PARENT_RIGHT_CENTER_VERTICAL);
 	tankFactary->setLayoutParameter(rp_right_center);
-	//¸øtankFacktaryÌí¼Ó¼àÌýÆ÷
+	//ç»™tankFacktaryæ·»åŠ ç›‘å¬å™¨
 	tankFactary->addTouchEventListener([=](Ref * pSender, Widget::TouchEventType type)
 	{
 		if (type == Widget::TouchEventType::BEGAN)
 		{
 			if (checkBuilding(TANK_FACTARY_MONEY, BUILDING_CONSUME_POWER))
 			{
-				//½ûÓÃ²ã¼àÌýÆ÷
+				//ç¦ç”¨å±‚ç›‘å¬å™¨
 				unit_manager->getCombatScene()->destListener->setEnabled(false);
-				//Òþ²Ø²Ëµ¥
+				//éšè—èœå•
 				this->setVisible(false);
 				onBuilding(14, TankFactary::size);
 			}
 		}
 	});
 
-	// ´´½¨Ò»¸öÍË³ö¸ÃlayerµÄButton¶ÔÏó
+	// åˆ›å»ºä¸€ä¸ªé€€å‡ºè¯¥layerçš„Buttonå¯¹è±¡
 	exit = Button::create("Picture/menu/backNormal.png",
 		"Picture/menu/backNormal.png");
 	layout->addChild(exit);
 	RelativeLayoutParameter* rp_exit = RelativeLayoutParameter::create();
 	rp_exit->setAlign(RelativeLayoutParameter::RelativeAlign::PARENT_RIGHT_BOTTOM);
 	exit->setLayoutParameter(rp_exit);
-	//¸øexitÌí¼Ó¼àÌýÆ÷
+	//ç»™exitæ·»åŠ ç›‘å¬å™¨
 	exit->addTouchEventListener([=](Ref * pSender, Widget::TouchEventType type)
 	{
 		if (type == Widget::TouchEventType::BEGAN)
@@ -178,7 +178,7 @@ bool MilitaryCampLayer::init()
 	}
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	auto bc = Sprite::create("Picture/background/bc.png");
-	//³õÊ¼»¯layout
+	//åˆå§‹åŒ–layout
 	layout = Layout::create();
 	layout->setLayoutType(LayoutType::RELATIVE);
 	layout->setContentSize(Size(bc->getContentSize().width, bc->getContentSize().height*0.8));
@@ -186,7 +186,7 @@ bool MilitaryCampLayer::init()
 	layout->setBackGroundImage("Picture/background/bc.png");
 	this->addChild(layout);
 
-	// ´´½¨Ò»¸ö´´½¨soldierµÄButton¶ÔÏó£¬ÉèÖÃÔÚLayoutµÄ×óÉÏ²¿
+	// åˆ›å»ºä¸€ä¸ªåˆ›å»ºsoldierçš„Buttonå¯¹è±¡ï¼Œè®¾ç½®åœ¨Layoutçš„å·¦ä¸Šéƒ¨
 	soldier = Button::create("/Picture/menu/SoldierMenu.png",
 		"/Picture/menu/SoldierMenu.png");
 	layout->addChild(soldier);
@@ -194,7 +194,7 @@ bool MilitaryCampLayer::init()
 	rp_TopLeft->setAlign(RelativeLayoutParameter::RelativeAlign::PARENT_TOP_LEFT);
 	soldier->setLayoutParameter(rp_TopLeft);
 	soldier->setScale(0.8);
-	//¸øsoldierÌí¼Ó¼àÌýÆ÷
+	//ç»™soldieræ·»åŠ ç›‘å¬å™¨
 	soldier->addTouchEventListener([=](Ref * pSender, Widget::TouchEventType type)
 	{
 		if (type == Widget::TouchEventType::BEGAN)
@@ -210,7 +210,7 @@ bool MilitaryCampLayer::init()
 		}
 	});
 
-	// ´´½¨Ò»¸ö´´½¨dogµÄButton¶ÔÏó£¬ÉèÖÃÔÚLayoutµÄÓÒÉÏ²¿
+	// åˆ›å»ºä¸€ä¸ªåˆ›å»ºdogçš„Buttonå¯¹è±¡ï¼Œè®¾ç½®åœ¨Layoutçš„å³ä¸Šéƒ¨
 	dog = Button::create("/Picture/menu/DogMenu.png",
 		"/Picture/menu/DogMenu.png");
 	layout->addChild(dog);
@@ -218,7 +218,7 @@ bool MilitaryCampLayer::init()
 	rp_TopRight->setAlign(RelativeLayoutParameter::RelativeAlign::PARENT_TOP_RIGHT);
 	dog->setLayoutParameter(rp_TopRight);
 	dog->setScale(0.8);
-	//¸ødogÌí¼Ó¼àÌýÆ÷
+	//ç»™dogæ·»åŠ ç›‘å¬å™¨
 	dog->addTouchEventListener([=](Ref * pSender, Widget::TouchEventType type)
 	{
 		if (type == Widget::TouchEventType::BEGAN)
@@ -234,14 +234,14 @@ bool MilitaryCampLayer::init()
 		}
 	});
 
-	// ´´½¨Ò»¸öÍË³ö¸ÃlayerµÄButton¶ÔÏó
+	// åˆ›å»ºä¸€ä¸ªé€€å‡ºè¯¥layerçš„Buttonå¯¹è±¡
 	exit = Button::create("Picture/menu/backNormal.png",
 		"Picture/menu/backNormal.png");
 	layout->addChild(exit);
 	RelativeLayoutParameter* rp_exit = RelativeLayoutParameter::create();
 	rp_exit->setAlign(RelativeLayoutParameter::RelativeAlign::PARENT_RIGHT_BOTTOM);
 	exit->setLayoutParameter(rp_exit);
-	//¸øexitÌí¼Ó¼àÌýÆ÷
+	//ç»™exitæ·»åŠ ç›‘å¬å™¨
 	exit->addTouchEventListener([=](Ref * pSender, Widget::TouchEventType type)
 	{
 		if (type == Widget::TouchEventType::BEGAN)
@@ -262,7 +262,7 @@ bool TankFactaryLayer::init()
 	}
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	auto bc = Sprite::create("Picture/background/bc.png");
-	//³õÊ¼»¯layout
+	//åˆå§‹åŒ–layout
 	layout = Layout::create();
 	layout->setLayoutType(LayoutType::RELATIVE);
 	layout->setContentSize(Size(bc->getContentSize().width, bc->getContentSize().height*0.8));
@@ -270,7 +270,7 @@ bool TankFactaryLayer::init()
 	layout->setBackGroundImage("Picture/background/bc.png");
 	this->addChild(layout);
 
-	// ´´½¨Ò»¸ö´´½¨ÌìÆôÌ¹¿ËµÄButton¶ÔÏó£¬ÉèÖÃÔÚLayoutµÄ×óÉÏ½Ç
+	// åˆ›å»ºä¸€ä¸ªåˆ›å»ºå¤©å¯å¦å…‹çš„Buttonå¯¹è±¡ï¼Œè®¾ç½®åœ¨Layoutçš„å·¦ä¸Šè§’
 	tank = Button::create("/Picture/menu/TankMenu.png",
 		"/Picture/menu/TankMenu.png");
 	layout->addChild(tank);
@@ -278,7 +278,7 @@ bool TankFactaryLayer::init()
 	rp_TopLeft->setAlign(RelativeLayoutParameter::RelativeAlign::PARENT_TOP_LEFT);
 	tank->setLayoutParameter(rp_TopLeft);
 	tank->setScale(0.8);
-	//¸øÌìÆôÌ¹¿ËÌí¼Ó¼àÌýÆ÷
+	//ç»™å¤©å¯å¦å…‹æ·»åŠ ç›‘å¬å™¨
 	tank->addTouchEventListener([=](Ref * pSender, Widget::TouchEventType type)
 	{
 		if (type == Widget::TouchEventType::BEGAN)
@@ -294,7 +294,7 @@ bool TankFactaryLayer::init()
 		}
 	});
 
-	// ´´½¨Ò»¸ö´´½¨ariplainµÄButton¶ÔÏó£¬ÉèÖÃÔÚLayoutµÄÓÒÉÏ½Ç
+	// åˆ›å»ºä¸€ä¸ªåˆ›å»ºariplainçš„Buttonå¯¹è±¡ï¼Œè®¾ç½®åœ¨Layoutçš„å³ä¸Šè§’
 	airplane = Button::create("/Picture/menu/AirplaneMenu.png",
 		"/Picture/menu/AirplaneMenu.png");
 	layout->addChild(airplane);
@@ -302,7 +302,7 @@ bool TankFactaryLayer::init()
 	rp_TopRight->setAlign(RelativeLayoutParameter::RelativeAlign::PARENT_TOP_RIGHT);
 	airplane->setLayoutParameter(rp_TopRight);
 	airplane->setScale(0.8);
-	//¸øairplaneÌí¼Ó¼àÌýÆ÷
+	//ç»™airplaneæ·»åŠ ç›‘å¬å™¨
 	airplane->addTouchEventListener([=](Ref * pSender, Widget::TouchEventType type)
 	{
 		if (type == Widget::TouchEventType::BEGAN)
@@ -318,14 +318,14 @@ bool TankFactaryLayer::init()
 		}
 	});
 
-	// ´´½¨Ò»¸öÍË³ö¸ÃlayerµÄButton¶ÔÏó
+	// åˆ›å»ºä¸€ä¸ªé€€å‡ºè¯¥layerçš„Buttonå¯¹è±¡
 	exit = Button::create("Picture/menu/backNormal.png",
 		"Picture/menu/backNormal.png");
 	layout->addChild(exit);
 	RelativeLayoutParameter* rp_exit = RelativeLayoutParameter::create();
 	rp_exit->setAlign(RelativeLayoutParameter::RelativeAlign::PARENT_RIGHT_BOTTOM);
 	exit->setLayoutParameter(rp_exit);
-	//¸øexitÌí¼Ó¼àÌýÆ÷
+	//ç»™exitæ·»åŠ ç›‘å¬å™¨
 	exit->addTouchEventListener([=](Ref * pSender, Widget::TouchEventType type)
 	{
 		if (type == Widget::TouchEventType::BEGAN)
@@ -367,12 +367,12 @@ void CreateUnitLayer::addListenerToRect(int type)
 				rec->setVisible(false);
 				center->startProduce(type, rec_abs_center);
 				building = false;
-				//ÏÔÊ¾²Ëµ¥
+				//æ˜¾ç¤ºèœå•
 				this->setVisible(true);
-				//ÖØÐÂÆôÓÃ²ã¼àÌýÆ÷
+				//é‡æ–°å¯ç”¨å±‚ç›‘å¬å™¨
 				unit_manager->getCombatScene()->destListener->setEnabled(true);
 				unit_manager->getCombatScene()->removeChild(rec);
-				//¹Ø±Õ»ùµØ½¨Ôì·¶Î§
+				//å…³é—­åŸºåœ°å»ºé€ èŒƒå›´
 				unit_manager->constructRange->setVisible(false);
 				return true;
 			}			
@@ -429,13 +429,13 @@ void CreateUnitLayer::onBuilding(int type,Size size)
 			rec_abs_center = rec_center - delta;
 			if (unit_manager->grid_map->checkPosition(unit_manager->getGridRect(rec_abs_center, rec_size)) && checkInRange(rec_abs_center))
 			{
-				//¿ÕµØÔò¿É½¨£¬ÌáÊ¾¿òÎªÂÌÉ«
+				//ç©ºåœ°åˆ™å¯å»ºï¼Œæç¤ºæ¡†ä¸ºç»¿è‰²
 				can_build = true;
 				rec->setColor(Color3B(0, 200, 0));
 			}
 			else
 			{
-				//¸ÃµØ±»Õ¼ÓÃ£¬ÌáÊ¾¿òÎªºìÉ«
+				//è¯¥åœ°è¢«å ç”¨ï¼Œæç¤ºæ¡†ä¸ºçº¢è‰²
 				can_build = false;
 				rec->setColor(Color3B(200, 0, 0));
 			}

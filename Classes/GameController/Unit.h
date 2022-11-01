@@ -28,7 +28,7 @@ class TankFactary;
 class Bar :public DrawNode {
 private:
 	/**
-	*Õ¹Ê¾ÑªÌõµÄ¼ÆÊ±Æ÷
+	*å±•ç¤ºè¡€æ¡çš„è®¡æ—¶å™¨
 	*/
 	int timer = 0;
 	int display_time = 0;
@@ -39,7 +39,7 @@ private:
 	cocos2d::Color4F color{ 0.8, 0, 0, 0.8 };
 public:
 	/**
-	*¸üĞÂÏÔÊ¾ÑªÌõ
+	*æ›´æ–°æ˜¾ç¤ºè¡€æ¡
 	*/
 	void updateBarDisplay(float rate);
 	void setLength(float _length) { length = _length; };
@@ -57,15 +57,15 @@ private:
 	Color4F color{ 0.5,0.8,0.95,0.5 };
 public:
 	/**
-	*ÏÔÊ¾¿É½¨Ôì·¶Î§(Ô²)
-	*²ÎÊı center:Ô²ĞÄ,radius:°ë¾¶
+	*æ˜¾ç¤ºå¯å»ºé€ èŒƒå›´(åœ†)
+	*å‚æ•° center:åœ†å¿ƒ,radius:åŠå¾„
 	*/
 	void drawRange(Point center,float radius);
 	CREATE_FUNC(ConstructRange);
 };
 
-class UnitManager : public cocos2d::Ref
-{
+// å•ä½ç®¡ç†å™¨
+class UnitManager : public cocos2d::Ref{
 public:
 	Vector<Layer*> createLayer;
 	int player_id = 0;
@@ -90,7 +90,7 @@ public:
 	void setCombatScene(CombatScene* _combat_scene);
 	void setSocketClient(chat_client* _socket_client);
 
-	//»ñÈ¡Ëæ»úÊı
+	//è·å–éšæœºæ•°
 	int genRandom(int start, int end);
 
 	CombatScene * getCombatScene();
@@ -99,84 +99,84 @@ public:
 	int  getUnitCamp(int unit_id);
 
 	/**
-	*·¢ËÍÉú³ÉĞÂµ¥Î»µÄĞÅÏ¢
-	*²ÎÊı _unit_type:ĞÂµ¥Î»µÄÀàĞÍ,camp:ĞÂµ¥Î»µÄÕóÓª,x¡¢y: ĞÂµ¥Î»³öÉúÎ»ÖÃ
+	*å‘é€ç”Ÿæˆæ–°å•ä½çš„ä¿¡æ¯
+	*å‚æ•° _unit_type:æ–°å•ä½çš„ç±»å‹,camp:æ–°å•ä½çš„é˜µè¥,xã€y: æ–°å•ä½å‡ºç”Ÿä½ç½®
 	*/
 	void genCreateMessage(int _unit_type, int camp, float x, float y);
 	/**
-	*´¦Àí½ÓÊÜµ½µÄ¸÷ÀàĞÅÏ¢: ´´½¨:CRT,¹¥»÷:ATK,ÒÆ¶¯:MOV,ÁÄÌì:CHT
+	*å¤„ç†æ¥å—åˆ°çš„å„ç±»ä¿¡æ¯: åˆ›å»º:CRT,æ”»å‡»:ATK,ç§»åŠ¨:MOV,èŠå¤©:CHT
 	*/
 	void updateUnitsState();
 	/**
-	*¸ù¾İµØÍ¼ĞÅÏ¢´´½¨³õÊ¼µ¥Î»
+	*æ ¹æ®åœ°å›¾ä¿¡æ¯åˆ›å»ºåˆå§‹å•ä½
 	*/
 	void initializeUnitGroup();
 	/**
-	*²¥·Å»ùµØ´´½¨µÄ¶¯»­
-	*²ÎÊı base:ĞèÒª²¥·Å¶¯»­µÄBase*¶ÔÏó
+	*æ’­æ”¾åŸºåœ°åˆ›å»ºçš„åŠ¨ç”»
+	*å‚æ•° base:éœ€è¦æ’­æ”¾åŠ¨ç”»çš„Base*å¯¹è±¡
 	*/
 	void playBaseCreateAnimation(Base * base);
 	/**
-	*½«µçÁ¦ÉÏÏŞÌá¸ß delta
+	*å°†ç”µåŠ›ä¸Šé™æé«˜ delta
 	*/
 	void setMax_power(int delta);
 	/**
-	*Ã¿ÃëÔö¼Ó½ğÇ®Ìá¸ß amount
+	*æ¯ç§’å¢åŠ é‡‘é’±æé«˜ amount
 	*/
 	void setIncreasingAmount(int amount);
 	/**
-	*±£´æ±¾ÕóÓª»ùµØÎ»ÖÃ
+	*ä¿å­˜æœ¬é˜µè¥åŸºåœ°ä½ç½®
 	*/
 	void setBasePosition(Point base_pos);
 	/**
-	*¸ù¾İµĞÎÒÎ»ÖÃÈ·¶¨¹¥»÷µĞ·½Ê±Í£ÔÚÄÇ¸öÎ»ÖÃ
-	*²ÎÊı attacker:·¢³ö¹¥»÷µÄµ¥Î»,target:±»¹¥»÷µÄµ¥Î»
-	*·µ»ØÖµ GridPoint ¹¥»÷·½Ä¿µÄµØ¸ñµã×ø±ê
+	*æ ¹æ®æ•Œæˆ‘ä½ç½®ç¡®å®šæ”»å‡»æ•Œæ–¹æ—¶åœåœ¨é‚£ä¸ªä½ç½®
+	*å‚æ•° attacker:å‘å‡ºæ”»å‡»çš„å•ä½,target:è¢«æ”»å‡»çš„å•ä½
+	*è¿”å›å€¼ GridPoint æ”»å‡»æ–¹ç›®çš„åœ°æ ¼ç‚¹åæ ‡
 	*/
 	GridPoint getAttackPoint(Unit * attacker,Unit * target);
 	Point getBasePosition()const;
 	/**
-	*¸ù¾İidÉ¾³ıµ¥Î»
+	*æ ¹æ®idåˆ é™¤å•ä½
 	*/
 	void deleteUnit(int id);
 	/**
-	*½«Size×ø±ê×ª»»ÎªGridSize×ø±ê
+	*å°†Sizeåæ ‡è½¬æ¢ä¸ºGridSizeåæ ‡
 	*/
 	GridSize getGridSize(Size size);
 	/**
-	*½«Point×ø±ê×ª»»ÎªGridPoint×ø±ê
+	*å°†Pointåæ ‡è½¬æ¢ä¸ºGridPointåæ ‡
 	*/
 	GridPoint getGridPoint(Point point);
 	/**
-	*½«GridPoint×ø±ê×ª»»ÎªPoint×ø±ê
+	*å°†GridPointåæ ‡è½¬æ¢ä¸ºPointåæ ‡
 	*/
 	Point getPoint(GridPoint grid_point);
 	/**
-	*¸ù¾İÖĞĞÄ×ø±êcenterºÍ·¶Î§size·µ»Ø¶ÔÓ¦µÄGridRect
+	*æ ¹æ®ä¸­å¿ƒåæ ‡centerå’ŒèŒƒå›´sizeè¿”å›å¯¹åº”çš„GridRect
 	*/
 	GridRect getGridRect(Point center, Size size);
 	/**
-	*µã»÷¿ÕµØÊ±½«¼º·½ºÏÊÊµÄµ¥Î»ÒÆ¶¯ÖÁpositionµÄÎ»ÖÃ
+	*ç‚¹å‡»ç©ºåœ°æ—¶å°†å·±æ–¹åˆé€‚çš„å•ä½ç§»åŠ¨è‡³positionçš„ä½ç½®
 	*/
 	void selectEmpty(Point position);
 	/**
-	*µ±µã»÷¾«Áéµ¥Î»Ê±,¸ù¾İµĞÎÒ½øĞĞ²»Í¬µÄ´¦Àí
+	*å½“ç‚¹å‡»ç²¾çµå•ä½æ—¶,æ ¹æ®æ•Œæˆ‘è¿›è¡Œä¸åŒçš„å¤„ç†
 	*/
 	void selectPointUnits(Unit * _unit);
 	/**
-	*¶ÔÑ¡ÖĞµÄ¼º·½µ¥Î»½øĞĞ´¦Àí
+	*å¯¹é€‰ä¸­çš„å·±æ–¹å•ä½è¿›è¡Œå¤„ç†
 	*/
 	void getClickedUnit();
 	/**
-	*Çå¿Õselected_ids
+	*æ¸…ç©ºselected_ids
 	*/
 	void cancellClickedUnit();
 	/**
-	*ÅĞ¶ÏÊ¤¸º
+	*åˆ¤æ–­èƒœè´Ÿ
 	*/
 	void checkWinOrLose(int base_id);
 	/**
-	*ÎªÃ¿¸öĞÂ¼ÓÈëµÄplayer·ÖÅäÕóÓª±êÊ¶
+	*ä¸ºæ¯ä¸ªæ–°åŠ å…¥çš„playeråˆ†é…é˜µè¥æ ‡è¯†
 	*/
 	void setPlayerNum(chat_client* _socket_client);
 private:
@@ -190,18 +190,19 @@ private:
 
 	Point _base_pos{ 0,0 };
 	/**
-	*´´½¨ĞÂµ¥Î»
-	*²ÎÊı _unit_type:ĞÂµ¥Î»µÄÀàĞÍ,camp:ĞÂµ¥Î»µÄÕóÓª,x¡¢y: ĞÂµ¥Î»³öÉúÎ»ÖÃ
+	*åˆ›å»ºæ–°å•ä½
+	*å‚æ•° _unit_type:æ–°å•ä½çš„ç±»å‹,camp:æ–°å•ä½çš„é˜µè¥,xã€y: æ–°å•ä½å‡ºç”Ÿä½ç½®
 	*/
 	Unit* createNewUnit(int id, int camp, int uint_type, float x, float y);
 	/**
-	*´´½¨´Óunit_id0µ½unit_id1µÄ¹¥»÷ÌØĞ§
-	*²ÎÊı unit_id0:¹¥»÷·½id, unit_id1:±»¹¥»÷·½id
+	*åˆ›å»ºä»unit_id0åˆ°unit_id1çš„æ”»å‡»ç‰¹æ•ˆ
+	*å‚æ•° unit_id0:æ”»å‡»æ–¹id, unit_id1:è¢«æ”»å‡»æ–¹id
 	*/
 	void genAttackEffect(int unit_id0, int unit_id1);
 
 };
 
+// ç²¾çµå•ä½
 class Unit :public cocos2d::Sprite {
 protected:
 	GameMessageSet * msgs = nullptr;
@@ -216,7 +217,7 @@ protected:
 	GridPoint _final_dest;
 	GridPath _grid_path;
 	/**
-	*count of delay ÑÓ³ÙÑ°Â·¼ÆÊıÆ÷
+	*count of delay å»¶è¿Ÿå¯»è·¯è®¡æ•°å™¨
 	*/
 	int del_cnt = -1;
 
@@ -226,11 +227,11 @@ protected:
 
 	bool is_moving = false;
 	/**
-	*count of delay ÑÓ³ÙÑ°Â·¼ÆÊıÆ÷
+	*count of delay å»¶è¿Ÿå¯»è·¯è®¡æ•°å™¨
 	*/
 	bool is_delaying = false; 
 	/**
-	*ÊÇ·ñ±»Ñ¡ÖĞµ±Ç°Ä¿±ê
+	*æ˜¯å¦è¢«é€‰ä¸­å½“å‰ç›®æ ‡
 	*/
 	bool selected = false;
 	int current_life=100;
@@ -242,20 +243,20 @@ protected:
 	Bar* hp_bar = nullptr;
 
 	/**
-	*¸ù¾İÉè¶¨Â·¾¶½øĞĞÒÆ¶¯
+	*æ ¹æ®è®¾å®šè·¯å¾„è¿›è¡Œç§»åŠ¨
 	*/
 	virtual void move();
 	/**
-	*µ¥Î»ÑÓ³ÙÑ°Â·
+	*å•ä½å»¶è¿Ÿå¯»è·¯
 	*/
 	void delay();
 	bool hasArrivedFinalDest();	
 	/**
-	*Ñ°Â·Ëã·¨
+	*å¯»è·¯ç®—æ³•
 	*/
 	virtual GridPath findPath(const GridPoint& dest)const;
 	/**
-	*ÓÅ»¯Ñ°Â·(ÈôÁ¬Ğø¼¸¸ö¸ñµãÔÚÍ¬Ò»ÌõÂ·¾¶ÉÏÔò°ÑÔ­ÏÈµÄ¼¸ÌõGridPathºÏ³ÉÎªÒ»Ìõ)
+	*ä¼˜åŒ–å¯»è·¯(è‹¥è¿ç»­å‡ ä¸ªæ ¼ç‚¹åœ¨åŒä¸€æ¡è·¯å¾„ä¸Šåˆ™æŠŠåŸå…ˆçš„å‡ æ¡GridPathåˆæˆä¸ºä¸€æ¡)
 	*/
 	GridPath optimizePath(const GridPath & origin_path) const;
 
@@ -264,15 +265,15 @@ public:
 	void setGridMap(GridMap *);
 	void setCurPos(const GridPoint _cur);
 	/**
-	*½«µ¥Î»¼Óµ½ÍßÆ¬µØÍ¼²¢°ó¶¨¼àÌıÆ÷,½«grid_mapÉèÎªµ±Ç°¸ñµãµØÍ¼
+	*å°†å•ä½åŠ åˆ°ç“¦ç‰‡åœ°å›¾å¹¶ç»‘å®šç›‘å¬å™¨,å°†grid_mapè®¾ä¸ºå½“å‰æ ¼ç‚¹åœ°å›¾
 	*/
 	void set(TMXTiledMap *, GridMap * _gridMap,Layer * _combat_scene, EventListenerTouchOneByOne *);
 	/**
-	*½«µ¥Î»¼Óµ½¸ñµãµØÍ¼²¢Õ¼ÓÃ¶ÔÓ¦¸ñµã
+	*å°†å•ä½åŠ åˆ°æ ¼ç‚¹åœ°å›¾å¹¶å ç”¨å¯¹åº”æ ¼ç‚¹
 	*/
 	virtual void addToGmap(Point p);
 	/**
-	*¸øµ¥Î»°ó¶¨¼àÌıÆ÷
+	*ç»™å•ä½ç»‘å®šç›‘å¬å™¨
 	*/
 	virtual void setListener();
 	void setUnitManager(UnitManager*);
@@ -287,29 +288,29 @@ public:
 	bool is_attack = false;
 	GridSize attack_range;
 	/**
-	*½¨ÖşÕ¼ÓÃµÄ¸ñµã¾ØĞÎ
+	*å»ºç­‘å ç”¨çš„æ ¼ç‚¹çŸ©å½¢
 	*/
 	GridRect rec;
 	bool is_in_attack = false;
 	static Unit* create(const std::string & filename);
 	/**
-	*ÉèÖÃÑÓ³ÙÑ°Â·
+	*è®¾ç½®å»¶è¿Ÿå¯»è·¯
 	*/
 	void setDelayPathFinding(int cnt);
 	/**
-	*´´½¨ÑªÌõ
+	*åˆ›å»ºè¡€æ¡
 	*/
 	virtual void initBar();
 	/**
-	*ÉèÖÃµ¥Î»ÊôĞÔ
+	*è®¾ç½®å•ä½å±æ€§
 	*/
 	virtual void setProperties();
 	/**
-	*½«µ¥Î»´ÓÍßÆ¬µØÍ¼È¥³ı£¬ÊÍ·ÅÕ¼ÓÃ¸ñµã£¬²¥·Å±¬Õ¨ÌØĞ§
+	*å°†å•ä½ä»ç“¦ç‰‡åœ°å›¾å»é™¤ï¼Œé‡Šæ”¾å ç”¨æ ¼ç‚¹ï¼Œæ’­æ”¾çˆ†ç‚¸ç‰¹æ•ˆ
 	*/
 	void removeFromMaps();
 	/**
-	*µ÷ÓÃfind_path()Ñ°ÕÒÒ»ÌõÂ·¾¶²¢ÇÒ·¢ËÍµ¥Î»ÒÆ¶¯µÄĞÅÏ¢
+	*è°ƒç”¨find_path()å¯»æ‰¾ä¸€æ¡è·¯å¾„å¹¶ä¸”å‘é€å•ä½ç§»åŠ¨çš„ä¿¡æ¯
 	*/
 	void tryToSearchForPath();
 
@@ -325,61 +326,62 @@ public:
 	int getSpeed() const;
 	bool isMobile();
 	/**
-	*¹¹Ôìº¯Êı
+	*æ„é€ å‡½æ•°
 	*/
 	Unit(int _max_life, int _atk_freq, double _atk_range, int _speed) 
 		:max_life(_max_life), attack_frequency(_atk_freq), attack_range(_atk_range), speed(_speed), rec(GridRect{ 0,0 })
 	{ ; };
 	Unit() :max_life(100), attack_frequency(1), speed(10), rec(GridRect{ 0,0 }) { ; };
 	/**
-	*ÅĞ¶Ïµ¥Î»ÊÇ²»ÊÇÔÚÄ³¸ö·¶Î§ÄÚ
+	*åˆ¤æ–­å•ä½æ˜¯ä¸æ˜¯åœ¨æŸä¸ªèŒƒå›´å†…
 	*/
 	bool is_in(Point p1, Point p2);
 	/**
-	*¶ÔÑªÌõµÄÏÔÊ¾ºÍÒş²Ø²Ù×÷
+	*å¯¹è¡€æ¡çš„æ˜¾ç¤ºå’Œéšè—æ“ä½œ
 	*/
 	void displayHP();
 	void hideHP();
 	/**
-	*·¢ËÍµ¥Î»¹¥»÷µÄĞÅÏ¢
+	*å‘é€å•ä½æ”»å‡»çš„ä¿¡æ¯
 	*/
 	void attack();
 	/**
-	*Ñ°ÕÒ¹¥»÷·¶Î§µÄµĞÈË
+	*å¯»æ‰¾æ”»å‡»èŒƒå›´çš„æ•Œäºº
 	*/
 	void searchEnemy();
 	/**
-	*±»¹¥»÷Ê±µôÑª
+	*è¢«æ”»å‡»æ—¶æ‰è¡€
 	*/
 	bool underAttack(int damage);
 	friend void UnitManager::updateUnitsState();
 	/**
-	*¸üĞÂµ¥Î»×´Ì¬£¬²¢¸ù¾İ²»Í¬×´Ì¬Ö´ĞĞ²»Í¬²Ù×÷
+	*æ›´æ–°å•ä½çŠ¶æ€ï¼Œå¹¶æ ¹æ®ä¸åŒçŠ¶æ€æ‰§è¡Œä¸åŒæ“ä½œ
 	*/
 	virtual void update(float f);
 };
 
-class TrajectoryEffect : public cocos2d::ParticleFire
-{
+// ç²’å­æ•ˆæœ
+class TrajectoryEffect : public cocos2d::ParticleFire{
 public:
 	virtual bool init() override;
 	/**
-	*Éè¶¨¹¥»÷ÌØĞ§Â·¾¶
+	*è®¾å®šæ”»å‡»ç‰¹æ•ˆè·¯å¾„
 	*/
 	void setPath(cocos2d::Vec2, cocos2d::Vec2);
 
 	CREATE_FUNC(TrajectoryEffect);
 private:
 	/**
-	*¸üĞÂ¹¥»÷ÌØĞ§Î»ÖÃ
+	*æ›´æ–°æ”»å‡»ç‰¹æ•ˆä½ç½®
 	*/
 	void updatefire(float);
 	cocos2d::Vec2 from_, to_, move_;
 	int speed_ = 7;
 };
 
-class ExplosionEffect :public cocos2d::ParticleFire
-{
+
+// ç²’å­æ•ˆæœ
+class ExplosionEffect :public cocos2d::ParticleFire{
 public:
 	virtual bool init() override;
 

@@ -13,7 +13,7 @@
 const int MAX_PLAYER_NUM = 4;
 USING_NS_CC;
 
-/*ÑªÌõ¸üĞÂ*/
+/*è¡€æ¡æ›´æ–°*/
 void Bar::updateBarDisplay(float rate) {
 
 	setVisible(true);
@@ -128,7 +128,7 @@ void Unit::hideHP()
 
 void Unit::move()
 {
-	//espÎªµ±Ç°¸ñµãÖ¸Ïòµ±Ç°ÖÕµãµÄµ¥Î»ÏòÁ¿
+	//espä¸ºå½“å‰æ ¼ç‚¹æŒ‡å‘å½“å‰ç»ˆç‚¹çš„å•ä½å‘é‡
 	auto esp = (_cur_dest_point - getPosition()).getNormalized();
 	Point next_position = esp * speed + getPosition();
 	GridPoint next_gpos = grid_map->getGridPoint(next_position);
@@ -441,8 +441,8 @@ bool Unit::underAttack(int damage)
 
 bool UnitManager::init()
 {
-	std::random_device rd;						//²ÉÓÃ·ÇÈ·¶¨ĞÔËæ»úÊı·¢ÉúÆ÷²úÉúËæ»úÊıÖÖ×Ó
-	gen = std::default_random_engine(rd());		//²ÉÓÃÄ¬ÈÏËæ»úÊıÒıÇæ²úÉúËæ»úÊı
+	std::random_device rd;						//é‡‡ç”¨éç¡®å®šæ€§éšæœºæ•°å‘ç”Ÿå™¨äº§ç”Ÿéšæœºæ•°ç§å­
+	gen = std::default_random_engine(rd());		//é‡‡ç”¨é»˜è®¤éšæœºæ•°å¼•æ“äº§ç”Ÿéšæœºæ•°
 	return true;
 }
 
@@ -543,7 +543,7 @@ void UnitManager::updateUnitsState()
 			if (unit_1) {
 				if (unit_0) {
 					Vec2 distance = unit_1->getPosition() - unit_0->getPosition();
-					/*Èç¹û¹¥»÷ÕßºÍ±»¹¥»÷Õß¾àÀë´óÓÚ×Ô¶¯¹¥»÷µÄ·¶Î§£¬±êÖ¾¹¥»÷ÕßÊÇ·ñ¹¥»÷is_attackÎªfalse£¬±êÖ¾ÕıÔÚ¹¥»÷is_in_attackÎªfalse*/
+					/*å¦‚æœæ”»å‡»è€…å’Œè¢«æ”»å‡»è€…è·ç¦»å¤§äºè‡ªåŠ¨æ”»å‡»çš„èŒƒå›´ï¼Œæ ‡å¿—æ”»å‡»è€…æ˜¯å¦æ”»å‡»is_attackä¸ºfalseï¼Œæ ‡å¿—æ­£åœ¨æ”»å‡»is_in_attackä¸ºfalse*/
 					if (distance.length() >= 1.414*unit_0->attack_range.height * 32)
 					{
 						if (unit_0->is_attack == false)
@@ -554,10 +554,10 @@ void UnitManager::updateUnitsState()
 					else
 					{
 						unit_0->is_in_attack = true;
-						/*Èç¹ûÊÇ¹·µÄ»°£¬ÎŞ×Óµ¯ÌØĞ§*/
+						/*å¦‚æœæ˜¯ç‹—çš„è¯ï¼Œæ— å­å¼¹ç‰¹æ•ˆ*/
 						if (unit_0 && unit_0->type == 4)
 						{
-							/*²»ÊÇÊ¿±øºÍ¹·²»¹¥»÷*/
+							/*ä¸æ˜¯å£«å…µå’Œç‹—ä¸æ”»å‡»*/
 							if (unit_1->type != 3 && unit_1->type != 4) { ; }
 							else
 							{
@@ -587,7 +587,7 @@ void UnitManager::updateUnitsState()
 				}							
 			}
 			else if (unit_0) {
-				/*Èç¹û±»¹¥»÷Ä¿±ê²»´æÔÚ£¬±êÖ¾ÕıÔÚ¹¥»÷is_in_attackÎªfalse,¹¥»÷Õß»áÖØĞÂËÑË÷µĞÈË*/
+				/*å¦‚æœè¢«æ”»å‡»ç›®æ ‡ä¸å­˜åœ¨ï¼Œæ ‡å¿—æ­£åœ¨æ”»å‡»is_in_attackä¸ºfalse,æ”»å‡»è€…ä¼šé‡æ–°æœç´¢æ•Œäºº*/
 				unit_0->is_in_attack = false;
 			}
 		}
@@ -619,7 +619,7 @@ void UnitManager::updateUnitsState()
 	msgs->clear_game_message();
 }
 void UnitManager::initializeUnitGroup() {
-	/* ¼ÓÔØ³õÊ¼»¯¶ÔÏó */
+	/* åŠ è½½åˆå§‹åŒ–å¯¹è±¡ */
 	auto* obj_group = tiled_map->getObjectGroup("InitialUnits");
 	auto& objs = obj_group->getObjects();
 	log(objs.size());
@@ -812,7 +812,7 @@ Unit* UnitManager::createNewUnit(int id, int camp, int unit_type, float x, float
 	nu->setProperties();
 	nu->id = id;	
 	nu->set(tiled_map, grid_map, (Layer*)combat_scene, spriteTouchListener);
-	//Èç¹ûÊÇ¼º·½»ùµØ´´½¨£¬Ôò»ùµØ²¥·Å½¨Ôì¶¯»­
+	//å¦‚æœæ˜¯å·±æ–¹åŸºåœ°åˆ›å»ºï¼Œåˆ™åŸºåœ°æ’­æ”¾å»ºé€ åŠ¨ç”»
 	if (nu->camp == player_id && nu->getType() == 0)
 	{
 		nu->setListenerEnable(false);
@@ -823,13 +823,13 @@ Unit* UnitManager::createNewUnit(int id, int camp, int unit_type, float x, float
 	nu->addToGmap(Point(x, y));
 	nu->initBar();
 
-	//Ë¢ĞÂµçÁ¦Ìõ
+	//åˆ·æ–°ç”µåŠ›æ¡
 	power->updatePowerDisplay();
 	nu->schedule(schedule_selector(Unit::update));
 	return(nu);
 }
 
-//Éú³ÉĞÂµ¥Î»²âÊÔ³ÌĞò
+//ç”Ÿæˆæ–°å•ä½æµ‹è¯•ç¨‹åº
 void UnitManager::genCreateMessage(int _unit_type, int camp, float x, float y)
 {
 	auto new_msg = msgs->add_game_message();

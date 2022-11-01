@@ -10,11 +10,11 @@ using namespace CocosDenshion;
 
 class PreLoad :public cocos2d::Layer {
 protected:
-	// ÓÎÏ·ĞèÒª¼ÓÔØµÄ×ÊÔ´×ÜÊı
+	// æ¸¸æˆéœ€è¦åŠ è½½çš„èµ„æºæ€»æ•°
 	int _sourceCount;
-	// ½ø¶ÈÌõ
+	// è¿›åº¦æ¡
 	ProgressTimer* _progress;
-	// ½ø¶ÈÌõ¸üĞÂÆµÂÊ
+	// è¿›åº¦æ¡æ›´æ–°é¢‘ç‡
 	float _progressInterval;
 public:
 	static bool hasPlayedBgm;

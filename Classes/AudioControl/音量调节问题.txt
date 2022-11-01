@@ -1,8 +1,8 @@
 protoc --cpp_out=. addressbook.proto
-PreLoadÀàÖĞÌí¼Ó¾²Ì¬³ÉÔ±isPlayingBgm,·ÀÖ¹ÔÚstartMenuSceneÖĞ¶à´Î¼ÓÔØbgm
-cocosÀï²é¿´setBackgroundMusicVolume£¨£©ºÍsetEffectsVolume£¨£©ÕâÁ½¸ö·½·¨ÔÚ¹Ù·½´úÂë¿âÀïÃæµÄÔ´´úÂë»á·¢ÏÖ£¬ÀïÃæÊÇ¿ÕµÄ¡£ĞèÒªÊÖ¶¯²¹³ä²Å¿ÉÒÔÊµÏÖÒôÁ¿´óĞ¡µÄµ÷½Ú¹¦ÄÜ¡£
-Éæ¼°ÎÄ¼ş£ºSimpleAudioEngine.cpp£¬MciPlayer.h£¬MciPlayer.cpp£¨ÒòÎªMCI_STATUSµÈ£¬Òª#include <Digitalv.h>£©
-ÕÒµ½×Ô¼º¸ÃÏîÄ¿ÏÂµÄxx\cocos2d\cocos\audio\win32ÀïÃæµÄSimpleAudioEngine.cppÕâ¸öÎÄ¼ş£¬´ò¿ªÒÔºóÕÒµ½¶ÔÓ¦µÄËÄ¸ö·½·¨£¬È»ºóÊÖ¶¯Ìí¼ÓÈçÏÂµÄ´úÂë:
+PreLoadç±»ä¸­æ·»åŠ é™æ€æˆå‘˜isPlayingBgm,é˜²æ­¢åœ¨startMenuSceneä¸­å¤šæ¬¡åŠ è½½bgm
+cocosé‡ŒæŸ¥çœ‹setBackgroundMusicVolumeï¼ˆï¼‰å’ŒsetEffectsVolumeï¼ˆï¼‰è¿™ä¸¤ä¸ªæ–¹æ³•åœ¨å®˜æ–¹ä»£ç åº“é‡Œé¢çš„æºä»£ç ä¼šå‘ç°ï¼Œé‡Œé¢æ˜¯ç©ºçš„ã€‚éœ€è¦æ‰‹åŠ¨è¡¥å……æ‰å¯ä»¥å®ç°éŸ³é‡å¤§å°çš„è°ƒèŠ‚åŠŸèƒ½ã€‚
+æ¶‰åŠæ–‡ä»¶ï¼šSimpleAudioEngine.cppï¼ŒMciPlayer.hï¼ŒMciPlayer.cppï¼ˆå› ä¸ºMCI_STATUSç­‰ï¼Œè¦#include <Digitalv.h>ï¼‰
+æ‰¾åˆ°è‡ªå·±è¯¥é¡¹ç›®ä¸‹çš„xx\cocos2d\cocos\audio\win32é‡Œé¢çš„SimpleAudioEngine.cppè¿™ä¸ªæ–‡ä»¶ï¼Œæ‰“å¼€ä»¥åæ‰¾åˆ°å¯¹åº”çš„å››ä¸ªæ–¹æ³•ï¼Œç„¶åæ‰‹åŠ¨æ·»åŠ å¦‚ä¸‹çš„ä»£ç :
 float SimpleAudioEngine::getBackgroundMusicVolume()
 
 {
@@ -44,7 +44,7 @@ void SimpleAudioEngine::setEffectsVolume(float volume)
 
        }    
 }
- ³ı´ËÖ®ÍâÄØ»¹ÒªÕÒµ½Í¬Ä¿Â¼ÏÂMciPlayer.hÎÄ¼ş£¬¼ÓÈëÈçÏÂ´úÂë£¨×Ô¼ºÕÒÒ»ÏÂÎ»ÖÃ£©£¬ºìÉ«µÄÊÇÎÒÃÇÒª¸Ä±äµÄ£º
+ é™¤æ­¤ä¹‹å¤–å‘¢è¿˜è¦æ‰¾åˆ°åŒç›®å½•ä¸‹MciPlayer.hæ–‡ä»¶ï¼ŒåŠ å…¥å¦‚ä¸‹ä»£ç ï¼ˆè‡ªå·±æ‰¾ä¸€ä¸‹ä½ç½®ï¼‰ï¼Œçº¢è‰²çš„æ˜¯æˆ‘ä»¬è¦æ”¹å˜çš„ï¼š
 
 // volume value ranges from 0 .. 1000
 
@@ -53,7 +53,7 @@ void SimpleAudioEngine::setEffectsVolume(float volume)
        // return value ranges from 0 .. 1000
 
        UINT Volume() const;
-È»ºóµ½MciPlayer.cppÎÄ¼şÖĞÕÒµ½¶ÔÓ¦µÄ·½·¨£¬²¢ĞŞ¸ÄÀïÃæµÄ´úÂë:
+ç„¶ååˆ°MciPlayer.cppæ–‡ä»¶ä¸­æ‰¾åˆ°å¯¹åº”çš„æ–¹æ³•ï¼Œå¹¶ä¿®æ”¹é‡Œé¢çš„ä»£ç :
 
 void MciPlayer::Volume(UINT volume)
 

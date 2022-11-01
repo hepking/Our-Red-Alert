@@ -1,10 +1,11 @@
 #include "GridMap.h"
+
 #define DEBUG
 #include "iostream"
 USING_NS_CC;
 
 GridMap * GridMap::create(const cocos2d::TMXTiledMap * tiled_map) {
-	//ÈôÉêÇëÊ§°ÜÔò·µ»Ønullptr
+	// 
 	GridMap *ret = new(std::nothrow)GridMap();
 	if (ret->initWithTiledMap(tiled_map)) {
 		ret->autorelease();
@@ -63,8 +64,7 @@ bool GridMap::hasApproached(const cocos2d::Point & cur_fp, const GridPoint & des
 }
 
 bool GridMap::occupyPosition(int id, const GridPoint & pos, bool occupy_grid) {
-	if (occupy_grid)
-	{
+	if (occupy_grid){
 		if (checkPosition(pos)) {
 			_gmap[pos._x][pos._y] = 1;
 			_umap[pos._x][pos._y] = id;

@@ -5,21 +5,19 @@ USING_NS_CC;
 const int DIR[8][2] = { {-1,-1},{-1,0},{-1,1},{0,-1},{0,1},{1,-1},{1,0},{1, 1} };
 const int DISTANCE = 10;
 
-Grid::Grid()
-{
+Grid::Grid(){
 	_x = _y = 0;
 	_flag = VACANT;
 	_g = _h = _f = 0;
 	_parent = nullptr;
 }
 
-PathFinding::PathFinding(const dyadic_array & map, GridPoint start, GridPoint destination)
-{
+PathFinding::PathFinding(const dyadic_array & map, GridPoint start, GridPoint destination){
 	_width = map.size();
 	_height = map[0].size();
 
-	std::vector<Grid> col(_height, Grid());		//ÏÈ³õÊ¼»¯_mapµÄÒ»ÁĞ
-	_map.assign(_width, col);					//³õÊ¼»¯_map
+	std::vector<Grid> col(_height, Grid());		//å…ˆåˆå§‹åŒ–_mapçš„ä¸€åˆ—
+	_map.assign(_width, col);					//åˆå§‹åŒ–_map
 
 	for (int i = 0; i < _width; ++i)
 		for (int j = 0; j < _height; ++j) {

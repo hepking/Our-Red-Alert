@@ -138,17 +138,17 @@ bool AudioControl::init() {
 void AudioControl::musicTogglemenuCallBack(Ref * pSender)
 {
 	
-	//´´½¨ÁÙÊ±MenuItemToggle  
+	//åˆ›å»ºä¸´æ—¶MenuItemToggle  
 	auto temp = (MenuItemToggle*)pSender;
-	//¸ù¾ÝMenuItemToggleµÄÑ¡ÏîÀ´¾ö¶¨ÒôÀÖµÄ¿ª¹Ø  
+	//æ ¹æ®MenuItemToggleçš„é€‰é¡¹æ¥å†³å®šéŸ³ä¹çš„å¼€å…³  
 	if (temp->getSelectedIndex() == 0)
 	{
-		//ÔÝÍ£²¥·ÅÒôÀÖ  
+		//æš‚åœæ’­æ”¾éŸ³ä¹  
 		SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
 	}
 	if (temp->getSelectedIndex() == 1)
 	{
-		//¼ÌÐø²¥·ÅÒôÀÖ  
+		//ç»§ç»­æ’­æ”¾éŸ³ä¹  
 		SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
 	}
 
@@ -158,17 +158,17 @@ void AudioControl::musicTogglemenuCallBack(Ref * pSender)
 }
 void AudioControl::effectTogglemenuCallBack(Ref * pSender)
 {
-	//´´½¨ÁÙÊ±MenuItemToggle  
+	//åˆ›å»ºä¸´æ—¶MenuItemToggle  
 	MenuItemToggle* temp = (MenuItemToggle*)pSender;
-	//¸ù¾ÝCCMenuItemToggleµÄÑ¡ÏîÀ´¾ö¶¨ÒôÀÖµÄ¿ª¹Ø  
+	//æ ¹æ®CCMenuItemToggleçš„é€‰é¡¹æ¥å†³å®šéŸ³ä¹çš„å¼€å…³  
 	if (temp->getSelectedIndex() == 0)
 	{
-		//ÔÝÍ£²¥·ÅÒôÀÖ  
+		//æš‚åœæ’­æ”¾éŸ³ä¹  
 		SimpleAudioEngine::sharedEngine()->pauseAllEffects();
 	}
 	if (temp->getSelectedIndex() == 1)
 	{
-		//¼ÌÐø²¥·ÅÒôÀÖ  
+		//ç»§ç»­æ’­æ”¾éŸ³ä¹  
 		SimpleAudioEngine::sharedEngine()->resumeAllEffects();
 	}
 }

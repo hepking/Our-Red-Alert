@@ -62,19 +62,19 @@ void Base::setListener()
 
 bool Base::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * event)
 {
-	// »ñµÃµ±Ç°ÊÂ¼ş´¥ÃşµÄÄ¿±ê¶ÔÏó
+	// è·å¾—å½“å‰äº‹ä»¶è§¦æ‘¸çš„ç›®æ ‡å¯¹è±¡
 	auto target = static_cast<Unit*>(event->getCurrentTarget());
-	// »ñµÃµ±Ç°µÄ´¥Ãşµã
+	// è·å¾—å½“å‰çš„è§¦æ‘¸ç‚¹
 	Point locationInNode = target->convertToNodeSpace(touch->getLocation());
-	// »ñµÃ´¥Ãş¶ÔÏóµÄContentSize
+	// è·å¾—è§¦æ‘¸å¯¹è±¡çš„ContentSize
 	Size s = target->getContentSize();
-	// »ñµÃÎ»ÖÃ¾ØĞÎ
+	// è·å¾—ä½ç½®çŸ©å½¢
 	Rect rect = Rect(0, 0, s.width, s.height);
-	// Èç¹ûÎ»ÖÃ¾ØĞÎ°üº¬´¥Ãşµã
+	// å¦‚æœä½ç½®çŸ©å½¢åŒ…å«è§¦æ‘¸ç‚¹
 	if (rect.containsPoint(locationInNode))
 	{
 		unit_manager->selectPointUnits(target);
-		// ±íÃ÷ÓÃ»§´¥ÃşÊÂ¼şÒÑ¾­±»´¦Àí£¬ºóĞøµÄonTouchMoved¡¢onTouchEndedºÍonTouchCancelled»á½Ó×ÅÏìÓ¦£¬ÆäËûÊÂ¼ş¼àÌıÆ÷Ôò²»»áÔÙÈ¥½øĞĞ¼àÌı±¾´Î´¥ÃşÊÂ¼ş¡£
+		// è¡¨æ˜ç”¨æˆ·è§¦æ‘¸äº‹ä»¶å·²ç»è¢«å¤„ç†ï¼Œåç»­çš„onTouchMovedã€onTouchEndedå’ŒonTouchCancelledä¼šæ¥ç€å“åº”ï¼Œå…¶ä»–äº‹ä»¶ç›‘å¬å™¨åˆ™ä¸ä¼šå†å»è¿›è¡Œç›‘å¬æœ¬æ¬¡è§¦æ‘¸äº‹ä»¶ã€‚
 		return true;
 	}
 	return false;
@@ -89,7 +89,7 @@ void Base::onTouchEnded(cocos2d::Touch * touch, cocos2d::Event * event)
 {
 	auto target = static_cast<Sprite*>(event->getCurrentTarget());
 	auto visibleSize = Director::getInstance()->getVisibleSize();
-	// ÉèÖÃÍ¸Ã÷¶È
+	// è®¾ç½®é€æ˜åº¦
 	target->setOpacity(255);
 	std::string name;
 	if (target == this)
@@ -139,7 +139,7 @@ void Base::update(float f)
 		setListenerEnable(true);
 		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("audio\\start.wav");
 	}
-	//×´Ì¬Îª1±íÊ¾ÕıÔÚÉú²ú£¬×´Ì¬Îª2±íÊ¾Éú²ú½áÊø£¬×´Ì¬Îª0±íÊ¾Ã»ÓĞÉú²úµÄµ¥Î»
+	//çŠ¶æ€ä¸º1è¡¨ç¤ºæ­£åœ¨ç”Ÿäº§ï¼ŒçŠ¶æ€ä¸º2è¡¨ç¤ºç”Ÿäº§ç»“æŸï¼ŒçŠ¶æ€ä¸º0è¡¨ç¤ºæ²¡æœ‰ç”Ÿäº§çš„å•ä½
 	if (state == 1)
 	{
 		if (++prod_process >= prod_period)
@@ -209,7 +209,7 @@ void Base::update(float f)
 
 void Building::update(float f)
 {
-	//×´Ì¬Îª1±íÊ¾ÕıÔÚÉú²ú£¬×´Ì¬Îª2±íÊ¾Éú²ú½áÊø£¬×´Ì¬Îª0±íÊ¾Ã»ÓĞÉú²úµÄµ¥Î»
+	//çŠ¶æ€ä¸º1è¡¨ç¤ºæ­£åœ¨ç”Ÿäº§ï¼ŒçŠ¶æ€ä¸º2è¡¨ç¤ºç”Ÿäº§ç»“æŸï¼ŒçŠ¶æ€ä¸º0è¡¨ç¤ºæ²¡æœ‰ç”Ÿäº§çš„å•ä½
 	if (state == 1)
 	{
 		if (++prod_process >= prod_period)
@@ -258,19 +258,19 @@ void MilitaryCamp::setListener()
 
 bool MilitaryCamp::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * event)
 {
-	// »ñµÃµ±Ç°ÊÂ¼ş´¥ÃşµÄÄ¿±ê¶ÔÏó
+	// è·å¾—å½“å‰äº‹ä»¶è§¦æ‘¸çš„ç›®æ ‡å¯¹è±¡
 	auto target = static_cast<Unit*>(event->getCurrentTarget());
-	// »ñµÃµ±Ç°µÄ´¥Ãşµã
+	// è·å¾—å½“å‰çš„è§¦æ‘¸ç‚¹
 	Point locationInNode = target->convertToNodeSpace(touch->getLocation());
-	// »ñµÃ´¥Ãş¶ÔÏóµÄContentSize
+	// è·å¾—è§¦æ‘¸å¯¹è±¡çš„ContentSize
 	Size s = target->getContentSize();
-	// »ñµÃÎ»ÖÃ¾ØĞÎ
+	// è·å¾—ä½ç½®çŸ©å½¢
 	Rect rect = Rect(0, 0, s.width, s.height);
-	// Èç¹ûÎ»ÖÃ¾ØĞÎ°üº¬´¥Ãşµã
+	// å¦‚æœä½ç½®çŸ©å½¢åŒ…å«è§¦æ‘¸ç‚¹
 	if (rect.containsPoint(locationInNode))
 	{
 		unit_manager->selectPointUnits(target);
-		// ±íÃ÷ÓÃ»§´¥ÃşÊÂ¼şÒÑ¾­±»´¦Àí£¬ºóĞøµÄonTouchMoved¡¢onTouchEndedºÍonTouchCancelled»á½Ó×ÅÏìÓ¦£¬ÆäËûÊÂ¼ş¼àÌıÆ÷Ôò²»»áÔÙÈ¥½øĞĞ¼àÌı±¾´Î´¥ÃşÊÂ¼ş¡£
+		// è¡¨æ˜ç”¨æˆ·è§¦æ‘¸äº‹ä»¶å·²ç»è¢«å¤„ç†ï¼Œåç»­çš„onTouchMovedã€onTouchEndedå’ŒonTouchCancelledä¼šæ¥ç€å“åº”ï¼Œå…¶ä»–äº‹ä»¶ç›‘å¬å™¨åˆ™ä¸ä¼šå†å»è¿›è¡Œç›‘å¬æœ¬æ¬¡è§¦æ‘¸äº‹ä»¶ã€‚
 		return true;
 	}
 	return false;
@@ -285,7 +285,7 @@ void MilitaryCamp::onTouchEnded(cocos2d::Touch * touch, cocos2d::Event * event)
 {
 	auto target = static_cast<Sprite*>(event->getCurrentTarget());
 	auto visibleSize = Director::getInstance()->getVisibleSize();
-	// ÉèÖÃÍ¸Ã÷¶È
+	// è®¾ç½®é€æ˜åº¦
 	target->setOpacity(255);
 	std::string name;
 	if (target == this)
@@ -342,19 +342,19 @@ void TankFactary::setListener()
 
 bool TankFactary::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * event)
 {
-	// »ñµÃµ±Ç°ÊÂ¼ş´¥ÃşµÄÄ¿±ê¶ÔÏó
+	// è·å¾—å½“å‰äº‹ä»¶è§¦æ‘¸çš„ç›®æ ‡å¯¹è±¡
 	auto target = static_cast<Unit*>(event->getCurrentTarget());
-	// »ñµÃµ±Ç°µÄ´¥Ãşµã
+	// è·å¾—å½“å‰çš„è§¦æ‘¸ç‚¹
 	Point locationInNode = target->convertToNodeSpace(touch->getLocation());
-	// »ñµÃ´¥Ãş¶ÔÏóµÄContentSize
+	// è·å¾—è§¦æ‘¸å¯¹è±¡çš„ContentSize
 	Size s = target->getContentSize();
-	// »ñµÃÎ»ÖÃ¾ØĞÎ
+	// è·å¾—ä½ç½®çŸ©å½¢
 	Rect rect = Rect(0, 0, s.width, s.height);
-	// Èç¹ûÎ»ÖÃ¾ØĞÎ°üº¬´¥Ãşµã
+	// å¦‚æœä½ç½®çŸ©å½¢åŒ…å«è§¦æ‘¸ç‚¹
 	if (rect.containsPoint(locationInNode))
 	{
 		unit_manager->selectPointUnits(target);
-		// ±íÃ÷ÓÃ»§´¥ÃşÊÂ¼şÒÑ¾­±»´¦Àí£¬ºóĞøµÄonTouchMoved¡¢onTouchEndedºÍonTouchCancelled»á½Ó×ÅÏìÓ¦£¬ÆäËûÊÂ¼ş¼àÌıÆ÷Ôò²»»áÔÙÈ¥½øĞĞ¼àÌı±¾´Î´¥ÃşÊÂ¼ş¡£
+		// è¡¨æ˜ç”¨æˆ·è§¦æ‘¸äº‹ä»¶å·²ç»è¢«å¤„ç†ï¼Œåç»­çš„onTouchMovedã€onTouchEndedå’ŒonTouchCancelledä¼šæ¥ç€å“åº”ï¼Œå…¶ä»–äº‹ä»¶ç›‘å¬å™¨åˆ™ä¸ä¼šå†å»è¿›è¡Œç›‘å¬æœ¬æ¬¡è§¦æ‘¸äº‹ä»¶ã€‚
 		return true;
 	}
 	return false;
@@ -368,7 +368,7 @@ void TankFactary::onTouchEnded(cocos2d::Touch * touch, cocos2d::Event * event)
 {
 	auto target = static_cast<Sprite*>(event->getCurrentTarget());
 	auto visibleSize = Director::getInstance()->getVisibleSize();
-	// ÉèÖÃÍ¸Ã÷¶È
+	// è®¾ç½®é€æ˜åº¦
 	target->setOpacity(255);
 	std::string name;
 	if (target == this)

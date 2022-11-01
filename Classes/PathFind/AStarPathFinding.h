@@ -13,7 +13,7 @@ typedef std::vector<Grid *> grid_vec;
 enum { VACANT, OCCUPIED, START, DESTINATION, OPEN, CLOSE };
 
 /**
-	* @brief GridÀà¿Ì»­²¢¼ÇÂ¼Ñ°Â·¹ı³ÌÖĞËùĞè¼ÆËãµÄ¸ñµãµÄÊıÖµ
+	* @brief Gridç±»åˆ»ç”»å¹¶è®°å½•å¯»è·¯è¿‡ç¨‹ä¸­æ‰€éœ€è®¡ç®—çš„æ ¼ç‚¹çš„æ•°å€¼
 */
 class Grid {
 public:
@@ -35,108 +35,108 @@ private:
 	int _x;
 	int _y;
 
-	int _flag;		//Íø¸ñµÄ±êÖ¾(¼ÇÂ¼±»Õ¼ÓÃ¡¢Î´±»Õ¼ÓÃ¡¢Æğµã¡¢ÖÕµã¡¢¿ª·Å¡¢·â±ÕÁùÖÖ×´Ì¬)
-	int _g;			//GÖµ£¬Å·¼¸ÀïµÃ¾àÀë(´ÓÆğµãµ½Ö¸¶¨·½¿éµÄÒÆ¶¯´ú¼Û)
-	int _h;			//HÖµ£¬Âü¹ş¶Ù¾àÀë(´Ó¸Ãµãµ½ÖÕµãµÄ¹ÀËã´ú¼Û£¬Æô·¢º¯Êı)
-	int _f;			//ĞĞ×ß´ú¼Û f = g + h
+	int _flag;		//ç½‘æ ¼çš„æ ‡å¿—(è®°å½•è¢«å ç”¨ã€æœªè¢«å ç”¨ã€èµ·ç‚¹ã€ç»ˆç‚¹ã€å¼€æ”¾ã€å°é—­å…­ç§çŠ¶æ€)
+	int _g;			//Gå€¼ï¼Œæ¬§å‡ é‡Œå¾—è·ç¦»(ä»èµ·ç‚¹åˆ°æŒ‡å®šæ–¹å—çš„ç§»åŠ¨ä»£ä»·)
+	int _h;			//Hå€¼ï¼Œæ›¼å“ˆé¡¿è·ç¦»(ä»è¯¥ç‚¹åˆ°ç»ˆç‚¹çš„ä¼°ç®—ä»£ä»·ï¼Œå¯å‘å‡½æ•°)
+	int _f;			//è¡Œèµ°ä»£ä»· f = g + h
 
-	Grid* _parent;	//¸¸½Úµã
+	Grid* _parent;	//çˆ¶èŠ‚ç‚¹
 };
 
 
 /**
-	* @brief PathFindingÀàÎªÑ°Â·Ëã·¨µÄºËĞÄÄÚÈİ
-	* @Ìá¹©ÁË³õÊ¼»¯Â·¾¶¡¢ËÑË÷Â·¾¶¡¢Éú³ÉÂ·¾¶¡¢·µ»ØÂ·¾¶ËÄ¸öÖ÷Òª½Ó¿Ú
+	* @brief PathFindingç±»ä¸ºå¯»è·¯ç®—æ³•çš„æ ¸å¿ƒå†…å®¹
+	* @æä¾›äº†åˆå§‹åŒ–è·¯å¾„ã€æœç´¢è·¯å¾„ã€ç”Ÿæˆè·¯å¾„ã€è¿”å›è·¯å¾„å››ä¸ªä¸»è¦æ¥å£
 */
 class PathFinding {
 public:
 /**
-	* @brief ¹¹Ôìº¯Êı£¬Ö÷ÒªÓÃÓÚ³õÊ¼»¯¸ñµãĞÅÏ¢ÓëÆğÖ¹µã
-	* @param map µ±_mapÖµÎª1Ê±±íÊ¾¿ÉÒÔÍ¨¹ı£¬·´Ö®²»ÄÜ
-	* @param start ¼ÇÂ¼ÆğÊ¼µãµÄÎ»ÖÃ
-	* @param destination ¼ÇÂ¼ÖÕÖ¹µãµÄÎ»ÖÃ
+	* @brief æ„é€ å‡½æ•°ï¼Œä¸»è¦ç”¨äºåˆå§‹åŒ–æ ¼ç‚¹ä¿¡æ¯ä¸èµ·æ­¢ç‚¹
+	* @param map å½“_mapå€¼ä¸º1æ—¶è¡¨ç¤ºå¯ä»¥é€šè¿‡ï¼Œåä¹‹ä¸èƒ½
+	* @param start è®°å½•èµ·å§‹ç‚¹çš„ä½ç½®
+	* @param destination è®°å½•ç»ˆæ­¢ç‚¹çš„ä½ç½®
 	*/
 	PathFinding(const dyadic_array& map, GridPoint start, GridPoint destination);
 
 /**
-	* @brief Ñ°ÕÒ¿ÉÄÜµÄÂ·¾¶
+	* @brief å¯»æ‰¾å¯èƒ½çš„è·¯å¾„
 	*/
 	void searchForPath();
 
 /**
-	* @brief Éú³ÉÒ»ÌõÂ·¾¶
+	* @brief ç”Ÿæˆä¸€æ¡è·¯å¾„
 	*/
 	void generatePath();
 
 /**
-	* @brief ½«ËùµÃÂ·¾¶·µ»Ø
-	* @return ×îÓÅÂ·¾¶
+	* @brief å°†æ‰€å¾—è·¯å¾„è¿”å›
+	* @return æœ€ä¼˜è·¯å¾„
 	*/
 	GridPath getPath()const { return _path; }
 private:
-	int _width;									//µØÍ¼¿í¶È
-	int _height;								//µØÍ¼¸ß¶È
-	std::vector<std::vector<Grid>>  _map;		//µØÍ¼¾ØÕó
-	Grid * _starting_point;						//ÆğÊ¼µã
-	Grid * _terminal_point;						//ÖÕµã
+	int _width;									//åœ°å›¾å®½åº¦
+	int _height;								//åœ°å›¾é«˜åº¦
+	std::vector<std::vector<Grid>>  _map;		//åœ°å›¾çŸ©é˜µ
+	Grid * _starting_point;						//èµ·å§‹ç‚¹
+	Grid * _terminal_point;						//ç»ˆç‚¹
 
-	grid_vec _open_list;						//¿ª·ÅÁĞ±í
-	grid_vec _close_list;						//·â±ÕÁĞ±í
-	GridPath _path;								//×îÖÕÂ·¾¶
+	grid_vec _open_list;						//å¼€æ”¾åˆ—è¡¨
+	grid_vec _close_list;						//å°é—­åˆ—è¡¨
+	GridPath _path;								//æœ€ç»ˆè·¯å¾„
 
 /**
-	* @brief ´Óµ±Ç°¿ª·ÅÁĞ±íÖĞÑ¡È¡ĞĞ×ß´ú¼ÛF×îĞ¡µÄµÄ¸ñµã×÷ÎªÏÂÒ»²½ÔËËãµÄ¸ñµã
-	* @return FÖµ×îĞ¡µÄ¸ñµã
+	* @brief ä»å½“å‰å¼€æ”¾åˆ—è¡¨ä¸­é€‰å–è¡Œèµ°ä»£ä»·Fæœ€å°çš„çš„æ ¼ç‚¹ä½œä¸ºä¸‹ä¸€æ­¥è¿ç®—çš„æ ¼ç‚¹
+	* @return Få€¼æœ€å°çš„æ ¼ç‚¹
 	*/
 	Grid * getNextGrid();
 
 /**
-	* @brief ¼ì²éµ±Ç°¸ñµã¸½½ü°Ë¸ö¸ñµãµÄ×´Ì¬
-	* @param grid µ±Ç°ËùĞè¼ì²éµÄÖĞĞÄ¸ñµã
+	* @brief æ£€æŸ¥å½“å‰æ ¼ç‚¹é™„è¿‘å…«ä¸ªæ ¼ç‚¹çš„çŠ¶æ€
+	* @param grid å½“å‰æ‰€éœ€æ£€æŸ¥çš„ä¸­å¿ƒæ ¼ç‚¹
 	*/
 	void checkSurroundedGrid(Grid & grid);
 
 /**
-	* @brief ÅĞ¶Ïµ±Ç°¸ñµãÊÇ·ñÔÚµØÍ¼·¶Î§ÄÚ
-	* @param grid µ±Ç°ËùĞè¼ì²éµÄ¸ñµã
-	* @return ÈôÔÚµØÍ¼·¶Î§ÄÚÔò·µ»Øtrue£¬·´Ö®false
+	* @brief åˆ¤æ–­å½“å‰æ ¼ç‚¹æ˜¯å¦åœ¨åœ°å›¾èŒƒå›´å†…
+	* @param grid å½“å‰æ‰€éœ€æ£€æŸ¥çš„æ ¼ç‚¹
+	* @return è‹¥åœ¨åœ°å›¾èŒƒå›´å†…åˆ™è¿”å›trueï¼Œåä¹‹false
 	*/
 	bool isInMapRange(cocos2d::Point & grid);
 
 /**
-	* @brief ÅĞ¶ÏÊÇ·ñÎª×ª½Ç£¬²»¿ÉĞ±×Å´©¹ıÕÏ°­Îï(ÀàËÆÏóÆåÖĞÂíµÄÒÆ¶¯²»ÄÜõ¿ÂíÍÈ)
-	* @param g1 µ±Ç°ÕıÔÚ¼ÆËãµÄ¸ñµã
-	* @param g2 ¿ÉÄÜµÄÏÂÒ»²½µÄ¸ñµã
-	* @return Èô¸Ã¸ñµãÎª×ª½ÇÔò·µ»Øtrue£¬·´Ö®false
+	* @brief åˆ¤æ–­æ˜¯å¦ä¸ºè½¬è§’ï¼Œä¸å¯æ–œç€ç©¿è¿‡éšœç¢ç‰©(ç±»ä¼¼è±¡æ£‹ä¸­é©¬çš„ç§»åŠ¨ä¸èƒ½è¹©é©¬è…¿)
+	* @param g1 å½“å‰æ­£åœ¨è®¡ç®—çš„æ ¼ç‚¹
+	* @param g2 å¯èƒ½çš„ä¸‹ä¸€æ­¥çš„æ ¼ç‚¹
+	* @return è‹¥è¯¥æ ¼ç‚¹ä¸ºè½¬è§’åˆ™è¿”å›trueï¼Œåä¹‹false
 	*/
 	bool isCorner(Grid & g1, Grid & g2);
 
 /**
-	* @brief ÅĞ¶Ï¸Ã¸ñµãÊÇ·ñ¿ÉÓÃ(ÓĞÎŞÕÏ°­Îï)
-	* @param grid µ±Ç°ÕıÔÚ¼ÆËãµÄ¸ñµã
-	* @return Èô¸Ã¸ñµã¿ÉÓÃÔò·µ»Øtrue£¬·´Ö®false
+	* @brief åˆ¤æ–­è¯¥æ ¼ç‚¹æ˜¯å¦å¯ç”¨(æœ‰æ— éšœç¢ç‰©)
+	* @param grid å½“å‰æ­£åœ¨è®¡ç®—çš„æ ¼ç‚¹
+	* @return è‹¥è¯¥æ ¼ç‚¹å¯ç”¨åˆ™è¿”å›trueï¼Œåä¹‹false
 	*/
 	bool isAvailable(Grid & grid);
 
 /**
-	* @brief ¼ÆËãÅ·¼¸ÀïµÃ¾àÀë(GÖµ)
-	* @param g1 µ±Ç°ÕıÔÚ¼ÆËãµÄ¸ñµã
-	* @param grid ÁÚ¸ñµã
+	* @brief è®¡ç®—æ¬§å‡ é‡Œå¾—è·ç¦»(Gå€¼)
+	* @param g1 å½“å‰æ­£åœ¨è®¡ç®—çš„æ ¼ç‚¹
+	* @param grid é‚»æ ¼ç‚¹
 	* @return EuclideanDistance
 	*/
 	int getEuclideanDistance(Grid & g1, Grid & g2);
 
 /**
-	* @brief ¼ÆËãÂü¹ş¶Ù¾àÀë(HÖµ)
-	* @param g1 µ±Ç°ÕıÔÚ¼ÆËãµÄ¸ñµã
-	* @param g2 ÖÕµã¸ñµã
+	* @brief è®¡ç®—æ›¼å“ˆé¡¿è·ç¦»(Hå€¼)
+	* @param g1 å½“å‰æ­£åœ¨è®¡ç®—çš„æ ¼ç‚¹
+	* @param g2 ç»ˆç‚¹æ ¼ç‚¹
 	* @return ManhattanDistance
 	*/	
 	int getManhattanDistance(Grid & g1, Grid & g2);
 
 /**
-	* @brief ½«ÒÑ¼ÓÈëµ½·â±ÕÁĞ±íµÄ¸ñµã´Ó¿ª·ÅÁĞ±íÖĞÒÆ³ı
-	* @param grid ÏëÒª´Ó¿ª·ÅÁĞ±íÖĞÒÆ³ıµÄ¸ñµã
+	* @brief å°†å·²åŠ å…¥åˆ°å°é—­åˆ—è¡¨çš„æ ¼ç‚¹ä»å¼€æ”¾åˆ—è¡¨ä¸­ç§»é™¤
+	* @param grid æƒ³è¦ä»å¼€æ”¾åˆ—è¡¨ä¸­ç§»é™¤çš„æ ¼ç‚¹
 	*/		
 	void removeFromOpenList(Grid * grid);
 };

@@ -10,7 +10,7 @@ USING_NS_CC;
 class CombatScene;
 
 /**
-*½¨Öş»ùÀà£¬¼Ì³Ğ×ÔUnit
+*å»ºç­‘åŸºç±»ï¼Œç»§æ‰¿è‡ªUnit
 */
 class Building : public Unit{
 private:
@@ -19,67 +19,67 @@ public:
 	bool layer_is_created = false;
 	Point createPosition = Point(0, 0);
 	/**
-	*ÓÃÓÚ²¥·Å¶¯»­µÄ½¨ÖşÔØÌå
+	*ç”¨äºæ’­æ”¾åŠ¨ç”»çš„å»ºç­‘è½½ä½“
 	*/
 	Sprite * building;
 	/**
-	*½¨Öşµ±Ç°×´Ì¬:0->²»´¦ÓÚÉú²ú×´Ì¬;1->ÕıÔÚÉú²ú;2->µ±Ç°µ¥Î»Éú²ú½áÊø
+	*å»ºç­‘å½“å‰çŠ¶æ€:0->ä¸å¤„äºç”Ÿäº§çŠ¶æ€;1->æ­£åœ¨ç”Ÿäº§;2->å½“å‰å•ä½ç”Ÿäº§ç»“æŸ
 	*/
 	int state = 0;
 	/**
-	*µ±Ç°Éú²úµ¥Î»µÄÀàĞÍ
+	*å½“å‰ç”Ÿäº§å•ä½çš„ç±»å‹
 	*/
 	int cur_prod;
 	/**
-	*µ±Ç°Éú²úµ¥Î»ËùĞèÏûºÄÊ±¼ä
+	*å½“å‰ç”Ÿäº§å•ä½æ‰€éœ€æ¶ˆè€—æ—¶é—´
 	*/
 	int prod_period;
 	/**
-	*Éú²úµ±Ç°µ¥Î»Ê±ÒÑ¾­ÏûºÄµÄÊ±¼ä
+	*ç”Ÿäº§å½“å‰å•ä½æ—¶å·²ç»æ¶ˆè€—çš„æ—¶é—´
 	*/
 	int prod_process;
 	/**
-	*¼ÇÂ¼¸÷ÀàĞÍµ¥Î»Éú²úËùĞèÏûºÄÊ±¼ä
+	*è®°å½•å„ç±»å‹å•ä½ç”Ÿäº§æ‰€éœ€æ¶ˆè€—æ—¶é—´
 	*/
 	std::map<int, int> period_map;
 	/**
-	*Éú²úĞòÁĞ
+	*ç”Ÿäº§åºåˆ—
 	*/
 	std::vector<int> prod_list;
 	/**
-	*Éú²ú½ø¶ÈÌõ
+	*ç”Ÿäº§è¿›åº¦æ¡
 	*/
 	Bar* prod_bar = nullptr;
 	/**
-	*ÉèÖÃÉú²ú²Ëµ¥µÄ¿É¼ûĞÔ
+	*è®¾ç½®ç”Ÿäº§èœå•çš„å¯è§æ€§
 	*/
 	void setLayerVisible(Layer *);
 	/**
-	*½¨Öş¸ù¾İ¸ñµã¾ØĞÎÕ¼ÓÃ¸ñµã
+	*å»ºç­‘æ ¹æ®æ ¼ç‚¹çŸ©å½¢å ç”¨æ ¼ç‚¹
 	*/
 	void addToGmap(Point p) override;
 	/**
-	*Îª²»Í¬µÄ½¨Öş·ÖÅä²»Í¬µÄ¼àÌıÆ÷
+	*ä¸ºä¸åŒçš„å»ºç­‘åˆ†é…ä¸åŒçš„ç›‘å¬å™¨
 	*/
 	virtual void setListener();
 	/**
-	*´´½¨ÑªÌõºÍÉú²ú½ø¶ÈÌõ
+	*åˆ›å»ºè¡€æ¡å’Œç”Ÿäº§è¿›åº¦æ¡
 	*/
 	virtual void initBar();
 	/**
-	*¸üĞÂ½¨Öş×´Ì¬
+	*æ›´æ–°å»ºç­‘çŠ¶æ€
 	*/
 	virtual void update(float f);
 	/**
-	*½«_unit_type¼ÓÈëÉú²úĞòÁĞ(ÓÃÓÚ·Ç½¨ÖşÀàÉú²ú)
+	*å°†_unit_typeåŠ å…¥ç”Ÿäº§åºåˆ—(ç”¨äºéå»ºç­‘ç±»ç”Ÿäº§)
 	*/
 	void startProduce(int _unit_type);
 	/**
-	*½«_unit_type¼ÓÈëÉú²úĞòÁĞ,²¢½«createPositionÉèÎª_point(Êó±êµã»÷Î»ÖÃ)(ÓÃÓÚ½¨ÖşÀàÉú²ú)
+	*å°†_unit_typeåŠ å…¥ç”Ÿäº§åºåˆ—,å¹¶å°†createPositionè®¾ä¸º_point(é¼ æ ‡ç‚¹å‡»ä½ç½®)(ç”¨äºå»ºç­‘ç±»ç”Ÿäº§)
 	*/
 	void startProduce(int _unit_type, Point _point);
 	/**
-	*·µ»Ø¸Ã½¨ÖşÖÜÎ§Î´±»Õ¼ÓÃµÄÎ»ÖÃ
+	*è¿”å›è¯¥å»ºç­‘å‘¨å›´æœªè¢«å ç”¨çš„ä½ç½®
 	*/
 	Point findFreePosition();
 };
@@ -90,14 +90,14 @@ private:
 	void setProperties() override;
 public:	
 	/**
-	*¿É´´½¨·¶Î§°ë¾¶
+	*å¯åˆ›å»ºèŒƒå›´åŠå¾„
 	*/
 	float construct_range = 500;
 	static Size size;	
 	BaseLayer * baselayer = nullptr;
 
 	/**
-	*ÉèÖÃbaselayerÖĞ¸÷°´Å¥µÄ¿ÉÓÃĞÔ
+	*è®¾ç½®baselayerä¸­å„æŒ‰é’®çš„å¯ç”¨æ€§
 	*/
 	void setMenuEnable(bool able);
 
@@ -105,7 +105,7 @@ public:
 	void update(float f);
 
 	/**
-	*¸øBaseÀà¶ÔÏóÌí¼Ó¼àÌıÆ÷(¼´µã»÷ÊÂ¼ş+µ¯³ö²Ëµ¥)
+	*ç»™Baseç±»å¯¹è±¡æ·»åŠ ç›‘å¬å™¨(å³ç‚¹å‡»äº‹ä»¶+å¼¹å‡ºèœå•)
 	*/
 	void setListener();
 	bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event);
@@ -125,7 +125,7 @@ public:
 	static MilitaryCamp* create(const std::string & filename);
 
 	/**
-	*¸øMilitaryCampÀà¶ÔÏóÌí¼Ó¼àÌıÆ÷(¼´µã»÷ÊÂ¼ş+µ¯³ö²Ëµ¥)
+	*ç»™MilitaryCampç±»å¯¹è±¡æ·»åŠ ç›‘å¬å™¨(å³ç‚¹å‡»äº‹ä»¶+å¼¹å‡ºèœå•)
 	*/
 	void setListener();
 	bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event);
@@ -144,7 +144,7 @@ public:
 	static TankFactary* create(const std::string & filename);
 
 	/**
-	*¸øTankFactoryÀà¶ÔÏóÌí¼Ó¼àÌıÆ÷(¼´µã»÷ÊÂ¼ş+µ¯³ö²Ëµ¥)
+	*ç»™TankFactoryç±»å¯¹è±¡æ·»åŠ ç›‘å¬å™¨(å³ç‚¹å‡»äº‹ä»¶+å¼¹å‡ºèœå•)
 	*/
 	void setListener();
 	bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event);
@@ -162,7 +162,7 @@ public:
 	static Mine* create(const std::string & filename);
 
 	/**
-	*Ã¿Ãë½ğÇ®Ôö¼ÓÁ¿Ôö¼Óamount
+	*æ¯ç§’é‡‘é’±å¢åŠ é‡å¢åŠ amount
 	*/
 	void setIncreasingAmount(int amount);
 };
@@ -177,7 +177,7 @@ public:
 	static PowerPlant* create(const std::string & filename);
 
 	/**
-	*µçÁ¦×î´ó¸ººÉÔö¼Ódelta
+	*ç”µåŠ›æœ€å¤§è´Ÿè·å¢åŠ delta
 	*/
 	void addMax_Power(int delta);
 };
