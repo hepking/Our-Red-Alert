@@ -50,7 +50,7 @@ private:
 */
 class PathFinding {
 public:
-/**
+	/**
 	* @brief 构造函数，主要用于初始化格点信息与起止点
 	* @param map 当_map值为1时表示可以通过，反之不能
 	* @param start 记录起始点的位置
@@ -58,17 +58,17 @@ public:
 	*/
 	PathFinding(const dyadic_array& map, GridPoint start, GridPoint destination);
 
-/**
+	/**
 	* @brief 寻找可能的路径
 	*/
 	void searchForPath();
 
-/**
+	/**
 	* @brief 生成一条路径
 	*/
 	void generatePath();
 
-/**
+	/**
 	* @brief 将所得路径返回
 	* @return 最优路径
 	*/
@@ -84,26 +84,26 @@ private:
 	grid_vec _close_list;						//封闭列表
 	GridPath _path;								//最终路径
 
-/**
+	/**
 	* @brief 从当前开放列表中选取行走代价F最小的的格点作为下一步运算的格点
 	* @return F值最小的格点
 	*/
 	Grid * getNextGrid();
 
-/**
+	/**
 	* @brief 检查当前格点附近八个格点的状态
 	* @param grid 当前所需检查的中心格点
 	*/
 	void checkSurroundedGrid(Grid & grid);
 
-/**
+	/**
 	* @brief 判断当前格点是否在地图范围内
 	* @param grid 当前所需检查的格点
 	* @return 若在地图范围内则返回true，反之false
 	*/
 	bool isInMapRange(cocos2d::Point & grid);
 
-/**
+	/**
 	* @brief 判断是否为转角，不可斜着穿过障碍物(类似象棋中马的移动不能蹩马腿)
 	* @param g1 当前正在计算的格点
 	* @param g2 可能的下一步的格点
@@ -111,14 +111,14 @@ private:
 	*/
 	bool isCorner(Grid & g1, Grid & g2);
 
-/**
+	/**
 	* @brief 判断该格点是否可用(有无障碍物)
 	* @param grid 当前正在计算的格点
 	* @return 若该格点可用则返回true，反之false
 	*/
 	bool isAvailable(Grid & grid);
 
-/**
+	/**
 	* @brief 计算欧几里得距离(G值)
 	* @param g1 当前正在计算的格点
 	* @param grid 邻格点
@@ -126,7 +126,7 @@ private:
 	*/
 	int getEuclideanDistance(Grid & g1, Grid & g2);
 
-/**
+	/**
 	* @brief 计算曼哈顿距离(H值)
 	* @param g1 当前正在计算的格点
 	* @param g2 终点格点
@@ -134,7 +134,7 @@ private:
 	*/	
 	int getManhattanDistance(Grid & g1, Grid & g2);
 
-/**
+	/**
 	* @brief 将已加入到封闭列表的格点从开放列表中移除
 	* @param grid 想要从开放列表中移除的格点
 	*/		

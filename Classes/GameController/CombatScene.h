@@ -25,7 +25,7 @@ public:
 	cocos2d::Point touch_start, touch_end;				//触摸事件的起始点和终点
 	cocos2d::Point touch_start_map, touch_end_map;		//对应于游戏地图的起始点与终点
 
-/**
+	/**
 	* @brief 用于刷新选框的显示
 	*/
 	void update(float f) override;
@@ -62,41 +62,41 @@ private:
 public:
 	PowerDisplay * powerDisplay = nullptr;		//用于同PowerDisplay类通信的指针
 
-/**
+	/**
 	* @brief 用于增加当前电量的上线
 	* @param delta 电量的增量
 	*/
 	void addMax_power(int delta);
 
-/**
+	/**
 	* @brief 新建建筑消耗当前所产生的电量
 	* @param delta 该建筑消耗的电量
 	*/
 	void spendPower(int power);
 
-/**
+	/**
 	* @brief 设置当前显示电量条的长度
 	*/
 	void setCur_length();
 
-/**
+	/**
 	* @brief 用于检查当前电量是否能为选择的建筑提供电力
 	* @param delta 如果电量充足则返回true，反之返回false
 	*/
 	bool checkPower(int delta);
 
-/**
+	/**
 	* @brief 根据当前电量的充裕程度设置显示颜色
 	* @如果电量充足则展示绿色，接下来依据电量充沛程度依次显示绿、黄、红色
 	*/
 	Color4F getColor();
 
-/**
+	/**
 	* @brief 更新电力条的显示状态
 	*/
 	void updatePowerDisplay();
 
-/**
+	/**
 	* @brief 友元函数，更新电力条显示状态的同时更新电力数据的显示
 	* @param power 电力数据
 	*/
@@ -105,48 +105,48 @@ public:
 	CREATE_FUNC(Power);
 };
 
-/**
+	/**
 	* @brief Money类继承自Label类
 	* @用于显示并刷新游戏中的金钱总数
 */
 class Money : public Label{
 public:
-/**
+	/**
 	* @brief 初始化金钱显示的数据
 	* @return 初始化成功则返回true，反之false
 	*/
 	bool init() override;
 
-/**
+	/**
 	* @brief 更新金钱数目
 	*/
 	void update(float f) override;
 
-/**
+	/**
 	* @brief 更新金钱数量的显示(由update函数进行调用)
 	*/
 	void updateMoneyDisplay();
 
-/**
+	/**
 	* @brief 检查金钱数目，判断剩余金钱能否支付目标建筑
 	* @param price 目标建筑的价格
 	* @return 若足够支付则返回ture，反之false
 	*/
 	bool checkMoney(int price) const;
 
-/**
+	/**
 	* @brief 建造建筑后扣除金钱
 	* @param cost 目标建筑的建造代价
 	*/
 	void spendMoney(int cost);
 
-/**
+	/**
 	* @brief 得到当下金钱增长的速度的值
 	* @return 金币增长速率
 	*/
 	int getIncreasingAmount() const;
 
-/**
+	/**
 	* @brief 设置当下金钱增长的速度的值
 	* @param amount 增长幅度(矿场的特性)
 	*/
@@ -165,14 +165,14 @@ private:
 */
 class Minimap :public Sprite {
 public:
-/**
+	/**
 	* @brief 创建小地图
 	* @param filename 小地图图片的路径
 	* @return 指向当前小地图的指针
 	*/
 	static Minimap *create(const std::string &filename);
 
-/**
+	/**
 	* @brief 标志小地图上的各方单位
 	* @param index 单位的id
 	* @param target 单位的坐标
@@ -202,44 +202,44 @@ public:
 	Power * power = nullptr;										//指向电力信息的指针
 	Money * money = nullptr;										//指向金钱信息的指针
 
-/**
+	/**
 	* @brief 构建选框
 	* @param p1 鼠标事件的起始点
 	* @param target 鼠标事件的终点
 	*/
 	void DrawRectArea(Point p1, Point p2);
 
-/**
+	/**
 	* @brief 向selected_box中收入被选中的节点
 	* @param p1 选框的初始点
 	* @param p2 选框的终点
 	*/
 	void getLayerUnit(Point p1, Point p2);
 
-/**
+	/**
 	* @brief 拖动地图 
 	* @当鼠标移到地图边界10~40像素时移动地图，0~10像素时速度翻倍
 	* @当按下键盘上下左右键时也能移动地图显示位置
 	*/
 	void dragMap();
 
-/**
+	/**
 	* @brief 刷新小地图的显示
 	*/	
 	void updateMircoLocation();
 
-/**
+	/**
 	* @brief 用于拖动地图后的视点位置的刷新
 	*/
 	virtual void update(float f);
 
-/**
+	/**
 	* @brief 用于返回selected_box
 	*/
 	static Scene* createScene(chat_server * server_context_, chat_client * client_context_);
 	virtual bool init(chat_server * server_context_, chat_client * client_context_);
 	
-/**
+	/**
 	* @brief 将视野中心设置为基地 
 	*/
 	void focusOnBase();
